@@ -3,7 +3,8 @@ export default defineNuxtConfig({
     enabled: true 
   },
   modules: [
-    "@nuxtjs/tailwindcss"
+    "@nuxtjs/tailwindcss",
+    "@pinia/nuxt"
   ],
   runtimeConfig: {
     public: {
