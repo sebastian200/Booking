@@ -9,7 +9,7 @@
       sort
     </div>
     <div id="listOfBooks" class="flex">
-      
+
     </div>
   </div>
 </template>

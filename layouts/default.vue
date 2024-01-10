@@ -20,5 +20,17 @@
     <slot />
   </main>
   <footer class="">
+    <div id="supportUs"></div>
+    <div>Support us</div>
+    <div><img src="" alt=""></div>
+    <div id="feedback"></div>
+    <div id="conact">
+      <div id="nameAndMail">
+      </div>
+      <div>socials</div>
+      <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
+    </div>
   </footer>
 </template>
