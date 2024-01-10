@@ -19,7 +19,7 @@ export const useBookStore = defineStore("book", {
       return this.author;
     },
     getPages(){
-
+      return this.pages;
     },
     getFormat() {
       return this.format;
