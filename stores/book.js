@@ -8,7 +8,7 @@ export const useBookStore = defineStore("book", {
     format: "",
     year: 0,
     genres: [],
-    imageLink: "";
+    imageLink: "",
   }),
   getters: {
 
