@@ -1,6 +1,16 @@
 <template>
   <div>
-    Booking
+    <div id="bookFilterContainer">
+      <div>
+
+      </div>
+    </div>
+    <div id="bookSorting">
+      sort
+    </div>
+    <div id="listOfBooks" class="flex">
+      
+    </div>
   </div>
 </template>
 
