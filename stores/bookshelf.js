@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 
-export const useBooksStore = defineStore("bookshelf", {
+export const useBookShelfStore = defineStore("bookshelf", {
   state: () => ({
     listOfBooks: [],
 
@@ -13,6 +13,10 @@ export const useBooksStore = defineStore("bookshelf", {
   },
   actions: {
     // Execute code on initialization
+    
+    init() {
+
+    },
 
     setBooks(newBooks) {
       this.listOfBooks.push(newBooks);
@@ -22,9 +26,6 @@ export const useBooksStore = defineStore("bookshelf", {
       this.listOfBooks = newListOfBooks;
     },
 
-    init() {
-
-    },
     filterBooks(title,){
 
     },

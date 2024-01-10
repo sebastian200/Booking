@@ -2,12 +2,13 @@ import { defineStore } from "pinia"
 
 export const useBookStore = defineStore("book", {
   state: () => ({
-    title: "Harry Potter",
+    title: "",
     author: "",
     pages: 0,
     format: "",
     year: 0,
     genres: [],
+    imageLink: "";
   }),
   getters: {
 
@@ -28,9 +29,17 @@ export const useBookStore = defineStore("book", {
     },
     getGenres() {
       return this.genres;
+    },
+    getImageLink() {
+      return this.imageLink;
     }
   },
   actions: {
+        // Execute code on initialization
+    init() {
+
+    },
+
     setTitle(newTitle) {
       this.title = newTitle
     },
@@ -50,5 +59,8 @@ export const useBookStore = defineStore("book", {
     setGenres(newGenres) {
       this.genres = newGenres;
     },
+    setImageLink(newImageLink) {
+      this.imageLink = newImageLink;
+    }
   }
 })

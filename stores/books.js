@@ -15,16 +15,14 @@ export const useBooksStore = defineStore("books", {
     }
   },
   actions: {
-    // Execute code on initialization
+
     setMAmount(newMAmount) {
       this.MAmount = newMAmount;
     },
     setMAmount(newAAmount) {
       this.AAmount = newAAmount;
     },
-    init() {
 
-    },
     add() {
 
     },
