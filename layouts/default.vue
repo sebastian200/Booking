@@ -10,7 +10,7 @@
     </div>
   </header>
 
-  <main class="h-screen">
+  <main class="h-screen border-solid border-gray-200 border-b-2">
     <slot />
   </main>
   <footer class="">
@@ -30,18 +30,20 @@
     </div>
     <div id="conact">
       <div id="nameAndMail">
-        <div><p class="text-center">Sebastian Alin.Sebastia@gmail.com</p> </div>
+        <div class="flex justify-center"><p>Sebastian ✉</p> <p>Alin.Sebastia@gmail.com</p> </div>
         <div><p>Hampus</p></div>
         <div><p>Elias</p></div>
       </div>
       
-      <div class="flex">
-        <img src="../assets/Images/" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="">
+      <div class="flex justify-around p-4 border-solid border-gray-200 border-b-2">
+        <img class="h-9" src="../assets/Images/Facebook_Logo_(2019).png.webp" alt="" />
+        <img class="h-9" src="../assets/Images/Instagram_icon.png" alt="" />
+        <img class="h-9" src="../assets/Images/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.webp" alt="" />
+        <img class="h-9" src="../assets/Images/LinkedIn_icon.svg.png" alt="">
       </div>
-      <div></div>
+      <div class="h-12 border-solid border-gray-200 border-b-2">
+
+      </div>
     </div>
   </footer>
 </template>
