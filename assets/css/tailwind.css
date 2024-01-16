@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+
+    @apply text-white;
+}
+
+.page {
+    @apply bg-gray-700;
+}
+.shadow {
+    @apply border-solid border-gray-500 border-b-2;
+}
+
+button {
+    @apply bg-blue-400 shadow-xl p-1 rounded-lg m-1;
+
+}
