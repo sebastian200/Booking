@@ -5,15 +5,5 @@
 </template>
 
 <script setup>
-import {
-  useBooksStore
-} from "~/stores/books"
 
-const booksStore = useBooksStore()
-
-console.log(booksStore.book.getTitle)
-
-booksStore.book.setTitle("Sagan om Ringen")
-
-console.log(booksStore.book.getTitle)
 </script>

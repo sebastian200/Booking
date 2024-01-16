@@ -6,8 +6,8 @@
         <nuxt-link to="">Booking</nuxt-link></div>
       <div class="flex justify-center">
         
-        <nuxt-link to="../pages/index.vue">Home</nuxt-link>
-        <nuxt-link to="">Suggestions</nuxt-link>
+        <nuxt-link to="/">Home</nuxt-link>
+        <nuxt-link to="/suggestions">Suggestions</nuxt-link>
       </div>
     </div>
 

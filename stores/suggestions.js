@@ -7,7 +7,7 @@ export const useSuggestionsStore = defineStore("suggestions", {
   getters: {
     getSuggestions() {
 
-    }
+    },
     getSuggestion(index) {
 
     }
@@ -15,7 +15,7 @@ export const useSuggestionsStore = defineStore("suggestions", {
   actions: {
     addSuggestion(suggestion) {
 
-    }
+    },
     removeSuggestion(index) {
 
     }

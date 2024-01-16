@@ -8,7 +8,7 @@ export const useSuggestionStore = defineStore("suggestion", {
   getters: {
     getBook() {
 
-    }
+    },
     getVotes() {
 
     }
@@ -16,7 +16,7 @@ export const useSuggestionStore = defineStore("suggestion", {
   actions: {
     upvote() {
 
-    }
+    },
     downvote() {
 
     }
