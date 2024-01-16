@@ -50,5 +50,11 @@ export const useBookStore = defineStore("book", {
     setGenres(newGenres) {
       this.genres = newGenres;
     },
+    serialize() {
+      return { ...this.$state }
+    },
+    deserialize(json) {
+      Object.assign(this.$state, json)
+    }
   }
 })

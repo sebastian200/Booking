@@ -18,6 +18,14 @@ export const useSuggestionsStore = defineStore("suggestions", {
     },
     removeSuggestion(index) {
 
+    },
+    serialize() {
+      return {
+        ...this.$state,
+      }
+    },
+    deserialize(json) {
+      Object.assign(this.$state, json)
     }
   }
 })

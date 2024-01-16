@@ -7,7 +7,7 @@ export default fromNodeMiddleware(async function handle(req, res) {
 
   console.log("dataToWrite: ", dataToWrite)
 
-  return fs.promises.writeFile(jsonFile, JSON.stringify(dataToWrite, null, 2), "utf-8").then(() => {
+  return fs.promises.writeFile(jsonFile, dataToWrite, "utf-8").then(() => {
     try {
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify({ success: "Data written to json file" }))
