@@ -1,31 +1,34 @@
 import { defineStore } from "pinia"
 
+import Book from "../classes/Book.js"
+import Suggestion from "../classes/Suggestion.js"
+
 export const useSuggestionsStore = defineStore("suggestions", {
   state: () => ({
     suggestions: []
   }),
   getters: {
     getSuggestions() {
-
+      return this.suggestions
     },
-    getSuggestion(index) {
+    getSuggestion() {
 
     }
   },
   actions: {
-    addSuggestion(suggestion) {
+    addSuggestion() {
 
     },
-    removeSuggestion(index) {
+    removeSuggestion() {
 
     },
-    serialize() {
+    toJSON() {
       return {
-        ...this.$state,
+
       }
     },
-    deserialize(json) {
-      Object.assign(this.$state, json)
+    fromJSON(json) {
+      
     }
   }
 })

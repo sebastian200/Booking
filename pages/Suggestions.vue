@@ -1,23 +1,21 @@
 <template>
   <div>
-    <p>{{ suggestionsStore.$state }}</p>
+    <p>{{ suggestions.$state }}</p>
   </div>
 </template>
 
 <script setup>
-const suggestionsStore = useSuggestionsStore()
+const suggestions = useSuggestionsStore()
 
 useFetch("/api/suggestions/read").then(({data: readData, error: readError}) => {
   try {
-    suggestionsStore.deserialize(readData.value)
-
-    suggestionsStore.addSuggestion(useSuggestionStore())
+    suggestions.fromJSON(readData.value)
 
     writeSuggestions()
   }
   catch(error) {
     console.log(error)
-    console.log("Could not deserialize suggestionsStore")
+    console.log("Could not deserialize suggestions")
   }
 })
 
@@ -26,6 +24,6 @@ const { execute: writeSuggestions } = useLazyFetch("/api/suggestions/write", {
   headers: {
     "Content-Type": "application/json"
   },
-  body: suggestionsStore.serialize(),
+  body: suggestions.toJSON(),
 })
 </script>
