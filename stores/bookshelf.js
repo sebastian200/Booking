@@ -1,42 +1,33 @@
 import { defineStore } from "pinia"
 
-export const useBookShelfStore = defineStore("bookshelf", {
+import Book from "../classes/Book.js"
+import Books from "../classes/Books.js"
+
+export const useBookshelfStore = defineStore("bookshelf", {
   state: () => ({
-    listOfBooks: [],
-
-
+    books: [],
   }),
   getters: {
-    getListOfBooks() {
-      return this.listOfBooks;
+    // If no filter is used, this equals getBooks
+    filterBooks(){
+
+    },
+    sortBooks() {
+
     }
   },
   actions: {
-    // Execute code on initialization
-    
-    init() {
+    addBooks() {
 
     },
-
-    setBooks(newBooks) {
-      this.listOfBooks.push(newBooks);
-    },
-
-    setListOfBooks (newListOfBooks) {
-      this.listOfBooks = newListOfBooks;
-    },
-
-    filterBooks(title,){
+    removeBooks() {
 
     },
-    SortBooks(type, reversed = false) {
+    toJSON() {
 
     },
-    addBooks(title) {
-
-    },
-    removeBooks(title) {
-
-    },
+    fromJSON(json) {
+      
+    }
   }
 })
