@@ -24,7 +24,9 @@ export const useBookshelfStore = defineStore("bookshelf", {
 
     },
     toJSON() {
+      return {
 
+      }
     },
     fromJSON(json) {
       

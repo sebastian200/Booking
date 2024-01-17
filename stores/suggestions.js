@@ -23,7 +23,9 @@ export const useSuggestionsStore = defineStore("suggestions", {
 
     },
     toJSON() {
+      return {
 
+      }
     },
     fromJSON(json) {
       
