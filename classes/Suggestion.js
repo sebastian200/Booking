@@ -1,7 +1,7 @@
 import Book from "./Book.js"
 
 export default class Suggestion {
-  constructor(book) {
+  constructor({ book }) {
     this.book = book
     this.votes = 0
   }
@@ -23,10 +23,17 @@ export default class Suggestion {
   }
 
   toJSON() {
-
+    return {
+      book: this.book.toJSON(),
+      votes: this.votes
+    }
   }
 
-  fromJSON(json) {
+  static fromJSON(json) {
+    let suggestion = new Suggestion()
 
+    Object.assign(suggestion, json)
+
+    return suggestion
   }
 }

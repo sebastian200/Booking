@@ -1,5 +1,5 @@
 export default class Book {
-  constructor(title, author, format, year, genres) {
+  constructor({ title, author, format, year, genres }) {
     this.title = title
     this.author = author
     this.format = format
@@ -25,5 +25,17 @@ export default class Book {
 
   getGenres() {
     return this.genres
+  }
+
+  toJSON() {
+    return { ...this }
+  }
+
+  static fromJSON(json) {
+    let book = new Book()
+
+    Object.assign(book, json)
+
+    return book
   }
 }

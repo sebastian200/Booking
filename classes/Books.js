@@ -1,10 +1,10 @@
 import Book from "./Book.js"
 
 export default class Books {
-  constructor(book, totalAmount) {
+  constructor({ book, amount }) {
     this.book = book
-    this.totalAmount = totalAmount
-    this.availableAmount = totalAmount
+    this.totalAmount = amount
+    this.availableAmount = amount
   }
 
   getBook() {
@@ -36,10 +36,16 @@ export default class Books {
   }
 
   toJSON() {
+    return {
 
+    }
   }
 
-  fromJSON(json) {
+  static fromJSON(json) {
+    let books = new Books()
 
+    Object.assign(books, json)
+
+    return books
   }
 }
