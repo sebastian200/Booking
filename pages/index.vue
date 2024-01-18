@@ -5,25 +5,20 @@
 </template>
 
 <script setup>
+import Book from "../classes/Book.js"
+import Books from "../classes/Books.js"
+
+const { $bookshelf } = useNuxtApp()
+
 const bookshelf = useBookshelfStore()
 
-useFetch("/api/bookshelf/read").then(({data: readData, error: readError}) => {
-  try {
-    bookshelf.fromJSON(readData.value)
+$bookshelf.read()
+.then(json => {
+  bookshelf.fromJSON(json)
 
-    writeBookshelf()
-  }
-  catch(error) {
-    console.log(error)
-    console.log("Could not deserialize bookshelf")
-  }
+  console.log(bookshelf.toJSON())
 })
-
-const { execute: writeBookshelf } = useLazyFetch("/api/suggestions/write", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(bookshelf.toJSON()),
+.catch(error => {
+  console.log("Could not read bookshelf json")
 })
 </script>
