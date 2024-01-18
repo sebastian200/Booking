@@ -14,9 +14,14 @@ const bookshelf = useBookshelfStore()
 
 $bookshelf.read()
 .then(json => {
+  console.log(json)
+
   bookshelf.fromJSON(json)
 
-  console.log(bookshelf.toJSON())
+  return $bookshelf.write(bookshelf.toJSON())
+})
+.then(json => {
+  console.log(json)
 })
 .catch(error => {
   console.log("Could not read bookshelf json")
