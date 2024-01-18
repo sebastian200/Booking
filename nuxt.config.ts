@@ -1,7 +1,13 @@
+import bodyParser from "body-parser"
+
 export default defineNuxtConfig({
   devtools: {
     enabled: true 
   },
+  serverMiddleware: [
+    bodyParser.json(),
+    "~/server/api/suggestions/write"
+  ],
   modules: [
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt"

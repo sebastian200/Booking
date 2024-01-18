@@ -19,11 +19,11 @@ useFetch("/api/bookshelf/read").then(({data: readData, error: readError}) => {
   }
 })
 
-const { execute: writeBookshelf } = useLazyFetch("/api/bookshelf/write", {
+const { execute: writeBookshelf } = useLazyFetch("/api/suggestions/write", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
-  body: bookshelf.toJSON(),
+  body: JSON.stringify(bookshelf.toJSON()),
 })
 </script>
