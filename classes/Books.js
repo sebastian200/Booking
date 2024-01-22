@@ -20,19 +20,19 @@ export default class Books {
   }
 
   borrowBook() {
-
+    this.availableAmount--;
   }
 
   returnBook() {
-
+    this.availableAmount++;
   }
 
   addBook() {
-
+    this.totalAmount++;
   }
 
   removeBook() {
-
+    this.totalAmount--;
   }
 
   toJSON() {

@@ -8,20 +8,17 @@ export const useBookshelfStore = defineStore("bookshelf", {
     books: [],
   }),
   getters: {
+    getBooks() {
+      return this.books.map(book => Book.fromJSON(book)) // convert to Book class object from json
+    },
+
   },
 
 
   actions: {
-    addBooks() {
-
-      if (reversed) {
-        sortedBooks.reverse();
-      }
-      return sortedBooks;
-    },
-    addBooks(title) {
-      this.listOfBooks.push(title);
-
+    addBooks(book) {
+      // For some reason, books can only contain POJOs
+      this.books.push(book.toJSON())
     },
     removeBooks(title) {
       for (let i = 0; i < this.listOfBooks.length; i++) {
@@ -31,13 +28,19 @@ export const useBookshelfStore = defineStore("bookshelf", {
       }
     },
 
-    toJSON() {
+    toJSON() { // convert to json
       return {
-
+        books: this.books.map(book => book)
       }
     },
-    fromJSON(json) {
-
+    fromJSON(json) { // convert from json
+      try {
+        json.books.map(book => this.books.push(book))
+      }
+      catch (error) {
+        console.log("Could not deserialize json to books")
+        // console.log(error)
+      }
     },
 
     // If no filter is used, this equals getBooks
@@ -47,7 +50,7 @@ export const useBookshelfStore = defineStore("bookshelf", {
     },
 
     loadListOfBooks() {
-
+      
     },
 
     saveListOfBooks() {
