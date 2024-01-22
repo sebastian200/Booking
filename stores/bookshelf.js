@@ -12,37 +12,37 @@ export const useBookshelfStore = defineStore("bookshelf", {
 
 
   actions: {
-      addBooks() {
-  
-        if (reversed) {
-          sortedBooks.reverse();
+    addBooks() {
+
+      if (reversed) {
+        sortedBooks.reverse();
+      }
+      return sortedBooks;
+    },
+    addBooks(title) {
+      this.listOfBooks.push(title);
+
+    },
+    removeBooks(title) {
+      for (let i = 0; i < this.listOfBooks.length; i++) {
+        if (this.listOfBooks[i].title === title) {
+          this.listOfBooks.splice(i, 1); // remove the book
         }
-        return sortedBooks;
-      },
-      addBooks(title) {
-        this.listOfBooks.push(title);
-  
-      },
-      removeBooks(title) {
-        for (let i = 0; i < this.listOfBooks.length; i++) {
-          if (this.listOfBooks[i].title === title) {
-            this.listOfBooks.splice(i, 1); // remove the book
-          }
-        }
-      },
-    
-      toJSON() {
-        return {
-  
-        }
-      },
-      fromJSON(json) {
-        
-      },
+      }
+    },
+
+    toJSON() {
+      return {
+
+      }
+    },
+    fromJSON(json) {
+
+    },
 
     // If no filter is used, this equals getBooks
 
-    setListOfBooks (newListOfBooks) {
+    setListOfBooks(newListOfBooks) {
       this.listOfBooks = newListOfBooks;
     },
 
@@ -51,7 +51,7 @@ export const useBookshelfStore = defineStore("bookshelf", {
     },
 
     saveListOfBooks() {
-      
+
     },
 
     filterBooks(title = "", author = "", type = "", pages = 0, genres = [],) {
@@ -106,5 +106,4 @@ export const useBookshelfStore = defineStore("bookshelf", {
     }
   },
 
-  }
 })
