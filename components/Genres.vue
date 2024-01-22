@@ -25,4 +25,13 @@ export default {
 
 <style>
 @import url('https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css');
+
+.price-range-slider {
+    width: 300px;
+  }
+  
+  input[type=range] {
+    width: calc(100% - 60px);
+  }
+  
 </style>
