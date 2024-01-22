@@ -20,13 +20,14 @@
     <div id="listOfBooks" class="px-2">
       <div>1000+ resultat</div>
       <div class="flex flex-wrap">
-        <bookFilter/>
+        <Filter/>
         <BooksCard/>
         <BooksCard/>
         <BooksCard/>
         <BooksCard/>
        
       </div>
+    
       
     </div>
   </div>
