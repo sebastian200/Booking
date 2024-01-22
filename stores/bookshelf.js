@@ -30,7 +30,7 @@ export const useBookshelfStore = defineStore("bookshelf", {
 
     toJSON() { // convert to json
       return {
-        books: this.books.map(book => book)
+        books: this.books.map(book => book) 
       }
     },
     fromJSON(json) { // convert from json
@@ -50,11 +50,16 @@ export const useBookshelfStore = defineStore("bookshelf", {
     },
 
     loadListOfBooks() {
-      
+      const { $bookshelf } = useNuxtApp()
+      $bookshelf.read().then(Response => {
+        this.fromJSON(Response);
+      });
     },
 
     saveListOfBooks() {
-
+      const { $bookshelf } = useNuxtApp()
+      $bookshelf.write(this.toJSON()).then (Response => console.log(Response));
+      
     },
 
     filterBooks(title = "", author = "", type = "", pages = 0, genres = [],) {

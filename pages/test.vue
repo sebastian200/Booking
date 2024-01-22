@@ -1,11 +1,11 @@
 <template>
     <div>
         <select name="countries" id="countries" multiple>
-            <option value="1">Afghanistan</option>
-            <option value="2">Australia</option>
-            <option value="3">Germany</option>
-            <option value="4">Canada</option>
-            <option value="5">Russia</option>
+            <option class=" text-gray-800" value="1">Afghanistan</option>
+            <option class="text-gray-800" value="2">Australia</option>
+            <option class="text-gray-800" value="3">Germany</option>
+            <option class="text-gray-800" value="4">Canada</option>
+            <option class="text-gray-800" value="5">Russia</option>
         </select>
     </div>
 </template>

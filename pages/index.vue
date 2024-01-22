@@ -42,7 +42,6 @@ import Book from "../classes/Book.js"
 import Books from "../classes/Books.js"
 
 
-const booksStore = useBooksStore()
 
 const { $bookshelf } = useNuxtApp()
 
