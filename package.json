@@ -17,7 +17,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@nuxt/kit": "npm:@nuxt/kit-nightly@latest",
     "@pinia/nuxt": "^0.5.1",
+    "body-parser": "^1.20.2",
     "firebase": "^10.7.1",
     "pinia": "^2.1.7",
     "vue-multiselect": "^2.1.8"

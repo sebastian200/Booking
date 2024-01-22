@@ -1,23 +1,41 @@
 import { defineStore } from "pinia"
 
+import Book from "../classes/Book.js"
+import Suggestion from "../classes/Suggestion.js"
+
 export const useSuggestionsStore = defineStore("suggestions", {
   state: () => ({
     suggestions: []
   }),
   getters: {
     getSuggestions() {
-
+      return this.suggestions.map(suggestion => Suggestion.fromJSON(suggestion))
     },
-    getSuggestion(index) {
+    getSuggestion() {
 
     }
   },
   actions: {
     addSuggestion(suggestion) {
+      // For some reason, suggestions can only contain POJOs
+      this.suggestions.push(suggestion.toJSON())
+    },
+    removeSuggestion() {
 
     },
-    removeSuggestion(index) {
-
+    toJSON() {
+      return {
+        suggestions: this.suggestions.map(suggestion => suggestion)
+      }
+    },
+    fromJSON(json) {
+      try {
+        json.suggestions.map(suggestion => this.suggestions.push(suggestion))
+      }
+      catch(error) {
+        console.log("Could not deserialize json to suggestions")
+        // console.log(error)
+      }
     }
   }
 })

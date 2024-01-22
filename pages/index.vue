@@ -30,6 +30,7 @@
     
       
     </div>
+    <p>{{ bookshelf.$state }}</p>
   </div>
 </template>
 
@@ -40,11 +41,28 @@ import {
 } from "~/stores/books"
 
 
+import Book from "../classes/Book.js"
+import Books from "../classes/Books.js"
+
+
 const booksStore = useBooksStore()
 
-console.log(booksStore.book.getTitle)
+const { $bookshelf } = useNuxtApp()
 
-booksStore.book.setTitle("Sagan om Ringen")
+const bookshelf = useBookshelfStore()
 
-console.log(booksStore.book.getTitle)
+$bookshelf.read()
+.then(json => {
+  console.log(json)
+
+  bookshelf.fromJSON(json)
+
+  return $bookshelf.write(bookshelf.toJSON())
+})
+.then(json => {
+  console.log(json)
+})
+.catch(error => {
+  console.log("Could not read bookshelf json")
+})
 </script>

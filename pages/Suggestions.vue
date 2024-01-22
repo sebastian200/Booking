@@ -29,21 +29,30 @@
       </div>
       
     </div>
+    <p>{{ suggestions.$state }}</p>
   </div>
 </template>
 
 <script setup>
+import Suggestion from "../classes/Suggestion.js"
+import Book from "../classes/Book.js"
 
-import {
-  useBooksStore
-} from "~/stores/books"
+const { $suggestions } = useNuxtApp()
 
+const suggestions = useSuggestionsStore()
 
-const booksStore = useBooksStore()
+$suggestions.read()
+.then(json => {
+  console.log(json)
 
-console.log(booksStore.book.getTitle)
+  suggestions.fromJSON(json)
 
-booksStore.book.setTitle("Sagan om Ringen")
-
-console.log(booksStore.book.getTitle)
+  return $suggestions.write(suggestions.toJSON())
+})
+.then(json => {
+  console.log(json)
+})
+.catch(error => {
+  console.log("Could not read suggestions json")
+})
 </script>

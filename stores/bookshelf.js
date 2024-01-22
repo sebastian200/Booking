@@ -1,26 +1,46 @@
 import { defineStore } from "pinia"
 
-export const useBookShelfStore = defineStore("bookshelf", {
+import Book from "../classes/Book.js"
+import Books from "../classes/Books.js"
+
+export const useBookshelfStore = defineStore("bookshelf", {
   state: () => ({
-    listOfBooks: [],
-
-
+    books: [],
   }),
   getters: {
-    getListOfBooks() {
-      return this.listOfBooks;
-    }
   },
+
+
   actions: {
-    // Execute code on initialization
+      addBooks() {
+  
+        if (reversed) {
+          sortedBooks.reverse();
+        }
+        return sortedBooks;
+      },
+      addBooks(title) {
+        this.listOfBooks.push(title);
+  
+      },
+      removeBooks(title) {
+        for (let i = 0; i < this.listOfBooks.length; i++) {
+          if (this.listOfBooks[i].title === title) {
+            this.listOfBooks.splice(i, 1); // remove the book
+          }
+        }
+      },
     
-    init() {
+      toJSON() {
+        return {
+  
+        }
+      },
+      fromJSON(json) {
+        
+      },
 
-    },
-
-    setBooks(newBooks) {
-      this.listOfBooks.push(newBooks);
-    },
+    // If no filter is used, this equals getBooks
 
     setListOfBooks (newListOfBooks) {
       this.listOfBooks = newListOfBooks;
@@ -83,23 +103,8 @@ export const useBookShelfStore = defineStore("bookshelf", {
           return a.year - b.year;
         });
       }
+    }
+  },
 
-      if (reversed) {
-        sortedBooks.reverse();
-      }
-      return sortedBooks;
-    },
-    addBooks(title) {
-      this.listOfBooks.push(title);
-
-    },
-    removeBooks(title) {
-      for (let i = 0; i < this.listOfBooks.length; i++) {
-        if (this.listOfBooks[i].title === title) {
-          this.listOfBooks.splice(i, 1); // remove the book
-        }
-      }
-    },
-  
   }
 })
