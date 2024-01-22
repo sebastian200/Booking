@@ -25,10 +25,7 @@
         <BooksCard/>
         <BooksCard/>
         <BooksCard/>
-       
       </div>
-    
-      
     </div>
     <p>{{ bookshelf.$state }}</p>
   </div>
