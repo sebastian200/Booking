@@ -33,11 +33,6 @@
 
 <script setup>
 
-import {
-  useBooksStore
-} from "~/stores/books"
-
-
 import Book from "../classes/Book.js"
 import Books from "../classes/Books.js"
 

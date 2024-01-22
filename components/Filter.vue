@@ -1,3 +1,4 @@
+<!-- FILEPATH: /c:/Users/22sebali/Desktop/Programering/projekt/Booking/components/Filter.vue -->
 <template>
   <div>
     <form action="">
@@ -14,25 +15,36 @@
       </div>
       <div id="genres">
         <p>Genres</p>
-        <select name="countries" id="countries" multiple>
-          <option value="1">Afghanistan</option>
-          <option value="2">Australia</option>
-          <option value="3">Germany</option>
-          <option value="4">Canada</option>
-          <option value="5">Russia</option>
-      </select>
-
+        <Genres/>
       </div>
-      <input type="">
+      <div id="price-range">
+        <p>Price Range</p>
+        <input type="number" v-model="minPrice" placeholder="Min Price">
+        <input type="number" v-model="maxPrice" placeholder="Max Price">
+        <input type="range" v-model="selectedPrice" min="0" :max="maxPrice" step="1">
+      </div>
     </form>
   </div>
 </template>
 
-
 <script>
-
-
-    
-
+export default {
+  data() {
+    return {
+      selectedPages: 0,
+      minPages: 0,
+      maxPages: 1000,
+      minPrice: 0,
+      maxPrice: 1000,
+      selectedPrice: 0
+    };
+  }
+};
 </script>
+
+<style>
+/* Add your custom styles here */
+</style>
+
+
 
