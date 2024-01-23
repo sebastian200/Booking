@@ -1,6 +1,6 @@
-<!-- FILEPATH: /c:/Users/22sebali/Desktop/Programering/projekt/Booking/components/Filter.vue -->
+
 <template>
-  <div>
+  <div class="border p-2 rounded-lg bg-slate-600">
     <form action="">
       <div id="title">
         <p>Titel</p>
@@ -16,8 +16,11 @@
       <div id="genres">
         <p>Genres</p>
         <Genres/>
-        <Slider/>
       </div>
+      <Slider/>
+      <div class="flex justify-center">
+      <button class=" border px-5 shadow-lg">Sök</button>
+    </div>
       
     </form>
   </div>

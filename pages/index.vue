@@ -17,7 +17,7 @@
       </div>
       
     </div>
-    <div id="listOfBooks" class="px-2">
+    <div id="listOfBooks" class="">
       <div>1000+ resultat</div>
       <div class="flex flex-wrap">
         <Filter/>

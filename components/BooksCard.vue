@@ -1,20 +1,20 @@
 
 <style>
 
-.BooksCard {
+#BooksCard {
   background-image: url("/assets/images/booksImmages/nedladdning (1).jpg");
 }
 </style>
 
 <template>
-  <div id="BooksCard" class="w-1/2">
-    <div class="shadow border-solid border-gray-400 p-2 rounded-md m-1.5 ">
+  <div  class="w-1/2">
+    <div id="BooksCard" class="border border-solid border-gray-400  rounded-xl m-1 ">
+      <div class="p-1 bg-slate-900 rounded-xl bg-opacity-60">
       <div id="bookImmage">
-        <img src="../assets/Images/booksImmages/nedladdning (1).jpg" alt="">
       </div>
       <div id="bookText">
-        <p id="title">title</p>
-        <p id="author">author</p>
+        <p id="title" class=" text-center">title</p>
+        <p id="author" class="text-center">author</p>
       </div>
       <div id="availability" class="flex justify-around">
         <p id="year">year</p>
@@ -24,6 +24,7 @@
         <button> Lend</button>
         <button> Return</button>
       </div>
+    </div>
     </div>
   </div>
 </template>

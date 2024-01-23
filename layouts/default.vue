@@ -10,7 +10,7 @@
     </div>
   </header>
 
-  <main class="page h-screen border-solid border-gray-200 border-b-2">
+  <main class="page border-solid border-gray-200 border-b-2">
     <slot />
   </main>
   <footer class="">
