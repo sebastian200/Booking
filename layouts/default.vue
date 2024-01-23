@@ -13,9 +13,9 @@
   <main class="page border-solid border-gray-200 border-b-2">
     <slot />
   </main>
-  <footer class="">
+  <footer class="page">
     <div id="supportUs">
-      <div class="flex justify-center m-4">
+      <div class="flex justify-center">
         <p>Support Us!</p>
       </div>
       <div id="swishQrCode" class="flex justify-center"><img class=" w-2/3" src="../assets/Images/swish-QR-small.png"

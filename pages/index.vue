@@ -1,30 +1,47 @@
+
+<style>
+.filter {
+  transition: height 0.3s ease-in-out;
+}
+
+.filter:hover {
+  transform: scale(1.1);
+}
+</style>
+
 <template>
   <div>
-    
-    <div id="bookSorting ">
-      
-      <div class="flex p-2 justify-around"> 
-        <div class="bg-blue-500 m-1 p-1 rounded-lg"><p>▼ Filter</p></div>
-        <form action="/action_page.php">
-          <label for="cars">Sortera efter</label>
-          <select class="border-solid border-gray-200 border-b-2 p-1 rounded-3xl bg-red-600 m-1" name="sorting" id="sorting" >
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
-          </select>
-        </form>
+    <div id="bookSorting">
+      <div class="p-1">
+        <div class="flex justify-around">
+          <input type="text" placeholder="sök" class="m-1 p-1">
+          <div class="bg-blue-500 m-1 p-1 rounded-lg" @click="toggleFilter">▼ Filter</div>
+        </div>
+        <div v-if="showFilter">
+          <Filter/>
+        </div>
       </div>
-      
+      <div class="flex justify-between">
+        <div class=" text-sm text-center m-1 text ">1000+ resultat</div>
+        <div class="  mx-5">
+          <select v-model="sortOption" class="bg-slate-600 rounded-md p-0.5 px-2 ">
+            <option value="title">Title</option>
+            <option value="pages">Pages</option>
+            <option value="year">Year</option>
+          </select>
+        </div>
+      </div>
     </div>
     <div id="listOfBooks" class="">
-      <div>1000+ resultat</div>
+      
       <div class="flex flex-wrap">
-        <Filter/>
-        <BooksCard/>
-        <BooksCard/>
-        <BooksCard/>
-        <BooksCard/>
+        <BooksCard />
+        <BooksCard />
+        <BooksCard />
+        <BooksCard />
+        <BooksCard />
+        <BooksCard />
+
       </div>
     </div>
     <p>{{ bookshelf.$state }}</p>
@@ -32,28 +49,44 @@
 </template>
 
 <script setup>
-
+import { ref, computed } from 'vue'
 import Book from "../classes/Book.js"
 import Books from "../classes/Books.js"
 
-
-
 const { $bookshelf } = useNuxtApp()
-
 const bookshelf = useBookshelfStore()
 
+const showFilter = ref(false)
+const sortOption = ref('title')
+
+function toggleFilter() {
+  showFilter.value = !showFilter.value
+}
+
+const sortedBooks = computed(() => {
+  const books = bookshelf.books
+  switch (sortOption.value) {
+    case 'title':
+      return books.sort((a, b) => a.title.localeCompare(b.title))
+    case 'pages':
+      return books.sort((a, b) => a.pages - b.pages)
+    case 'year':
+      return books.sort((a, b) => a.year - b.year)
+    default:
+      return books
+  }
+})
+
 $bookshelf.read()
-.then(json => {
-  console.log(json)
-
-  bookshelf.fromJSON(json)
-
-  return $bookshelf.write(bookshelf.toJSON())
-})
-.then(json => {
-  console.log(json)
-})
-.catch(error => {
-  console.log("Could not read bookshelf json")
-})
+  .then(json => {
+    console.log(json)
+    bookshelf.fromJSON(json)
+    return $bookshelf.write(bookshelf.toJSON())
+  })
+  .then(json => {
+    console.log(json)
+  })
+  .catch(error => {
+    console.log("Could not read bookshelf json")
+  })
 </script>
