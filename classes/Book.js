@@ -32,7 +32,7 @@ export default class Book {
   }
 
   static fromJSON(json) {
-    let book = new Book()
+    let book = new Book({})
 
     Object.assign(book, json)
 
