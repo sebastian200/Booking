@@ -1,14 +1,25 @@
+<style>
+  
+</style>
+
+
 <template>
-  <header class="flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-gray-500 border-b-2 bg-gray-600">
+  <header>
+  <div class="flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-b-2 ">
     <div class="flex m-1">
       <img class="h-full" src="../assets/Images/2232688.png" alt="" />
       <div class="invisible"><nuxt-link to="">Booking</nuxt-link></div>
     </div>
     <div class="flex align-middle">
+      
       <div class="m-3"><nuxt-link to="/">Home</nuxt-link></div>
       <div class="m-3"><nuxt-link to="/Suggestions">Suggestions</nuxt-link></div>
+
     </div>
-  </header>
+
+  </div>
+  <DropdownMenu class=" fixed w-screen"/>
+</header>
 
   <main class="page border-solid border-gray-200 border-b-2">
     <slot />
