@@ -15,7 +15,7 @@
       <div class="p-1">
         <div class="flex justify-around">
           <input type="text" placeholder="sök" class="m-1 p-1">
-          <div class="bg-blue-500 m-1 p-1 rounded-lg" @click="toggleFilter">▼ Filter</div>
+          <button class="" @click="toggleFilter">▼ Filter</button>
         </div>
         <div v-if="showFilter">
           <Filter/>
