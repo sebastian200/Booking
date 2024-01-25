@@ -23,10 +23,10 @@
         </div>
         <div class="flex justify-around p-4">
             <div>
-                <button>Logga in</button>
+                <button><nuxt-link to="/SignInAndUp">Logga in</nuxt-link></button>
             </div>
             <div>
-                <button>Registrera dig</button>
+                <button><nuxt-link to="/SignInAndUp">Registrera dig</nuxt-link></button>
             </div>
         </div>
         <div></div>
