@@ -1,6 +1,7 @@
 <template>
     <div>
         <select name="countries" id="countries" multiple>
+
             <option class=" text-gray-800" value="1">Afghanistan</option>
             <option class="text-gray-800" value="2">Australia</option>
             <option class="text-gray-800" value="3">Germany</option>
