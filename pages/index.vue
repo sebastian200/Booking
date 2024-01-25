@@ -34,15 +34,10 @@
     </div>
     <div id="listOfBooks" class="">
       
-      <div class="flex flex-wrap">
-        <BooksCard />
-        <BooksCard />
-        <BooksCard />
-        <BooksCard />
-        <BooksCard />
+      <li class="flex flex-wrap" >
         <BooksCard />
 
-      </div>
+      </li>
     </div>
     <p>{{ bookshelf.$state }}</p>
   </div>
@@ -62,6 +57,7 @@ const sortOption = ref('title')
 function toggleFilter() {
   showFilter.value = !showFilter.value
 }
+
 
 const sortedBooks = computed(() => {
   const books = bookshelf.books

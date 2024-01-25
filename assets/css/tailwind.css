@@ -13,7 +13,7 @@
 }
 input{
     @apply bg-white;
-    @apply border-solid border-gray-500 border-2 rounded-lg;
+    @apply border-solid border-gray-500 border-2 rounded-lg m-1 px-1;
 }
 select {
     @apply bg-slate-50;

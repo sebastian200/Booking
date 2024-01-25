@@ -18,8 +18,8 @@
             <nuxt-link class="text-center" to="">Inställningar</nuxt-link>
         </div>
 
-        <div class="shadow p-4 flex justify-center invisible">
-            <button class="px-4">Lägg till bok</button>
+        <div class="shadow p-4 flex justify-center ">
+            <nuxt-link to="/AddBook"><button class="px-4">Lägg till bok</button></nuxt-link>
         </div>
         <div class="flex justify-around p-4">
             <div>
