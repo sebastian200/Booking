@@ -7,10 +7,10 @@
 <template>
     <div>
         <div>
-            <div class="flex justify-between p-0.5"><p class="px-1">Jonas Öster</p>
+            <div class="flex justify-between p-1 pt-2"><p class="px-1">Jonas Öster</p>
                 <div class="px-1"> (2994)</div>
             </div>
-            <div class="p-1"> <p class=" text-center text-2xl font-bold">Sagon om Ringen</p></div>
+            <div class="pb-1"> <p class=" text-center text-2xl font-bold">Sagon om Ringen</p></div>
             
             
         </div>
@@ -51,8 +51,15 @@
 
 
         </div>
-        <div class="p-1.5 text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eius, fugit natus libero hic, placeat dolore ad, cumque rem aspernatur tenetur repellat quod quos rerum quam nemo ea. Libero, saepe.
+        <div class="px-2.5 pb-5 text-sm">
+            Plötsligt händer det märkliga ting i den lilla staden! Mystiska stjärnskott på himlen och svärmar av ugglor mitt på dagen, katter som läser kartor och underliga människor som står i gathörnen och viskar. De viskar om en viss Harry Potter ...
+            <p>
+
+                Föräldralöse Harry Potter bor hos sina elaka styvföräldrar och deras vidrige son. En helt ny värld öppnar sig för Harry när det visar sig att han egentligen är en trollkarl och börjar Hogwarths Skola för Häxkonster och Trolldom, en värld full av magi och spännande äventyr!
+                
+
+                </p>
+            
         </div>
         <div>
 

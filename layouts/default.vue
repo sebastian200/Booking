@@ -26,7 +26,7 @@
   <main class="page border-solid border-gray-200 border-b-2">
     <slot />
   </main>
-  <footer class="page">
+  <footer class=" bg-slate-100 ">
 
     <div id="supportUs" class="flex justify-around">
       <div class="flex justify-center">
