@@ -8,13 +8,15 @@
 
 <template>
   <div  class="w-1/2">
+    <nuxt-link to="/BookPopup">
     <div id="BooksCard" class="border border-solid border-gray-400 m-1  rounded-xl">
       <div class="p-1 bg-slate-900 rounded-xl bg-opacity-60">
       <div id="bookImmage">
       </div>
       <div id="bookText">
+          <p id="author" class="text-center ">author</p>
         <p id="title" class=" text-center">title</p>
-        <p id="author" class="text-center ">author</p>
+      
       </div>
       <div id="availability" class="flex justify-around">
         <p id="year">year</p>
@@ -26,6 +28,7 @@
       </div>
     </div>
     </div>
+  </nuxt-link>
   </div>
 </template>
 
