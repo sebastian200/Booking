@@ -1,6 +1,6 @@
 
 <template>
-  <div class="border p-2 rounded-lg bg-slate-600">
+  <div class=" p-2 rounded-lg bg-slate-50 ">
     <form action="">
       <div id="title">
         <p>Titel</p>

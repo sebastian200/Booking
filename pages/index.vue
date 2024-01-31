@@ -11,9 +11,9 @@
 
 <template>
   <div>
-    <div id="bookSorting" class="fixed bg-slate-50 shadow w-full pb-3">
-      <div class="p-1 w-full">
-        <div class="flex justify-around">
+    <div id="bookSorting" class="fixed bg-slate-50 shadow w-full ">
+      <div class="">
+        <div class="shadow flex justify-around pb-4 p-1 w-full ">
           <input type="text" placeholder="sök" class="m-1 p-1">
           <button class="" @click="toggleFilter">▼ Filter</button>
         </div>
@@ -36,7 +36,7 @@
     </div>
     <div id="listOfBooks" class="">
 
-      <li v-for="book in books" class="flex flex-wrap">
+      <li v-for="book in sortedBooks.value" class="flex flex-wrap">
         <BooksCard :books=book />
       </li>
     </div>
@@ -68,15 +68,17 @@ const sortedBooks = computed(() => {
   const books = bookshelf.books
   switch (sortOption.value) {
     case 'title':
-      return books.sort((a, b) => a.title.localeCompare(b.title))
+      return books.sort((a, b) => a.book.title.localeCompare(b.book.title))
     case 'pages':
-      return books.sort((a, b) => a.pages - b.pages)
+      return books.sort((a, b) => a.book.pages - b.book.pages)
     case 'year':
-      return books.sort((a, b) => a.year - b.year)
+      return books.sort((a, b) => a.book.year - b.book.year)
     default:
       return books
   }
 })
+
+console.log(sortedBooks.value)
 
 
 
