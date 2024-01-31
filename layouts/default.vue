@@ -2,8 +2,8 @@
 
 
 <template>
-  <header>
-    <div class="flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-b-2 ">
+  <header class=" fixed">
+    <div class="flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-b-2 bg-white">
       <div class="flex">
         <button class="m-0 shadow" @click="toggleDropdown()">
           <img class="h-full" src="../assets/Images/2232688.png" alt="" />
@@ -19,11 +19,12 @@
 
     </div>
     <div v-if="showDropdown">
-      <DropdownMenu class=" fixed w-screen" />
+      <DropdownMenu @disable="toggleDropdown()" class=" fixed w-screen" />
     </div>
   </header>
 
   <main class="page border-solid border-gray-200 border-b-2">
+    <div class="h-16"></div>
     <slot />
   </main>
   <footer class=" bg-slate-100 ">

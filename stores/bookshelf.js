@@ -16,9 +16,11 @@ export const useBookshelfStore = defineStore("bookshelf", {
 
 
   actions: {
-    addBooks(book) {
+    addBooks(books) {
       // For some reason, books can only contain POJOs
-      this.books.push(book.toJSON())
+
+      this.books.push(books.toJSON())
+
     },
     removeBooks(title) {
       for (let i = 0; i < this.listOfBooks.length; i++) {

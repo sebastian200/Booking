@@ -9,8 +9,8 @@
 <template>
   <div  class="w-1/2">
     <nuxt-link to="/BookPopup">
-    <div id="BooksCard" class="border border-solid border-gray-400 m-1  rounded-xl">
-      <div class="p-1 bg-slate-900 rounded-xl bg-opacity-60">
+    <div id="BooksCard" class="border border-solid border-gray-400 m-1  rounded-md">
+      <div class="p-1 bg-slate-50 rounded-md bg-opacity-50">
       <div id="bookImmage">
       </div>
       <div id="bookText">

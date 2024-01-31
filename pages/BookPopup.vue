@@ -1,4 +1,4 @@
-<style >
+<style scoped >
     li {
         @apply bg-green-300 px-2 rounded-full border-solid border-black mx-1;
     }
@@ -45,8 +45,10 @@
 
             </div>
             
-            <div class="flex justify-center">
-                <img class="h-20" src="/assets/Images/stars-customer-reviews-illustration-png.webp" alt="">
+            <div class="flex justify-between">
+                <div class=" my-auto p-1">Pages</div>
+                <img class="h-14" src="/assets/Images/stars-customer-reviews-illustration-png.webp" alt="">
+               
             </div>
 
 

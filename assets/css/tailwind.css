@@ -26,6 +26,10 @@ button {
     @apply bg-blue-400 shadow-xl p-1 rounded-lg m-1;
 
 }
+#button {
+    @apply bg-blue-400 shadow-xl p-1 rounded-lg m-1;
+
+}
 
 .border
 {

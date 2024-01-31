@@ -36,11 +36,8 @@ export default class Books {
   }
 
   toJSON() {
-    return {
-
-    }
+    return { ...this }
   }
-
   static fromJSON(json) {
     let books = new Books()
 
