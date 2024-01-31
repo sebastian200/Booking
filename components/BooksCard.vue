@@ -1,39 +1,64 @@
 
-<style>
-
-#BooksCard {
-  background-image: url("/assets/images/booksImmages/nedladdning (1).jpg");
-}
-</style>
+<style></style>
 
 <template>
-  <div  class="w-1/2">
-    <nuxt-link to="/BookPopup">
-    <div id="BooksCard" class="border border-solid border-gray-400 m-1  rounded-md">
-      <div class="p-1 bg-slate-50 rounded-md bg-opacity-50">
-      <div id="bookImmage">
+  <div class="w-full">
+    
+      <div id="BooksCard" class=" rounded-md border bg-slate-200 0 m-1 flex justify-between ">
+        <nuxt-link to="/BookPopup">
+        <div class="p-1 flex">
+         
+          <img class=" h-20 rounded-md" src="../assets//Images/booksImmages/nedladdning (1).jpg" alt="">
+          <div id="bookText" class="my-3 mx-3">
+            <p id="author" class="text-center text-lg font-bold">{{ book.author }}</p>
+            <p id="title" class=" text-center ">{{ book.title }}</p>
+          </div>
+        
+        </div>
+      </nuxt-link>
+        
+        
+     
+        <div class=" my-1">
+          <p class="text-center text-xl">{{ books.availableAmount }} left</p>
+          <button @click="lendBook()" class="px-4 py-2">Låna bok</button>
+
+
+        </div>
       </div>
-      <div id="bookText">
-          <p id="author" class="text-center ">author</p>
-        <p id="title" class=" text-center">title</p>
-      
-      </div>
-      <div id="availability" class="flex justify-around">
-        <p id="year">year</p>
-        <p>8/9</p>
-      </div>
-      <div class="flex justify-around">
-        <button> Lend</button>
-        <button> Return</button>
-      </div>
-    </div>
-    </div>
-  </nuxt-link>
+
   </div>
 </template>
 
 
 
 <script setup>
+import { ref, computed } from 'vue'
+import Book from "../classes/Book.js"
+import Books from "../classes/Books.js"
+
+const { $bookshelf } = useNuxtApp()
+const bookshelf = useBookshelfStore()
+
+
+const props = defineProps(["books"])
+
+const books = props.books
+const book = books.book
+
+function lendBook() {
+  books.availableAmount -= 1
+
+  for (let i = 0; i < bookshelf.books.length; i++) {
+    if (bookshelf.books[i].id == book.id) {
+      bookshelf.books[i].availableAmount -= 1
+      console.log(bookshelf.books[i])
+      bookshelf.toJSON()
+    }
+  }
+
+}
+
+
 
 </script>

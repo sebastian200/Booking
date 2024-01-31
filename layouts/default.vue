@@ -3,7 +3,7 @@
 
 <template>
   <header class=" fixed">
-    <div class="flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-b-2 bg-white">
+    <div class="w-screen flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-b-2 bg-white ">
       <div class="flex">
         <button class="m-0 shadow" @click="toggleDropdown()">
           <img class="h-full" src="../assets/Images/2232688.png" alt="" />

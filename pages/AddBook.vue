@@ -10,10 +10,15 @@
             <input class="w-full" type="text" placeholder="Titel" v-model="title">
             <input class="w-full" type="name" placeholder="Författare" v-model="author">
 
-            <div class=" flex flex-wrap justify-center">
+            <div class="">
+            <div class="flex justify-between">
                 <input type="number" min="1900" max="2099" step="1" placeholder="år" v-model="year">
                 <input type="number" placeholder="Kopior" v-model="copies">
-                <input class="w-full" type="number" placeholder="Sidor" v-model="pages">
+            </div>
+            <div class="flex justify-around">
+                <input class="w-1/2" type="text" placeholder="språk" v-model="language">
+                <input class="w-1/3" type="number" placeholder="Sidor" v-model="pages">
+            </div>
             </div>
 
             <Genres class="" />
@@ -53,6 +58,8 @@ const year = ref(null);
 const pages = ref(null);
 const copies = ref(null);
 const genres = ref(null);
+const language = ref(null);
+const format = ref('');
 
 const imageUrl = ref(null);
 const bookType = ref('');
@@ -70,13 +77,15 @@ const handleFileChange = (event) => {
 
 function addBook() {
 
-    const newBook = new Book({title: title.value,
-         author: author.value, 
-        year: year.value, pages:
-        pages.value, genres: 
-        genres.value, format: 
-        bookType.value,
-        imageUrl: imageUrl.value})
+    const newBook = new Book({
+        title: title.value,
+        author: author.value, 
+        year: year.value,
+        pages:pages.value, 
+        genres: genres.value,
+         format: bookType.value,
+        language: language.value,
+})
     
     const books = new Books({
         book: newBook,

@@ -8,9 +8,14 @@
             <div class="text-center">
                 lånade böcker
             </div>
-            <BookCardLended />
-            <BookCardLended />
-            <BookCardLended />
+            <li v-for="lendedBook in lendedBooks" >
+                <BooksCard />
+            </li>
+            
+            
+            
+            
+            
         </div>
         <div class="shadow p-4 flex justify-center">
             <nuxt-link class="text-center" to="">Inställningar</nuxt-link>
@@ -28,4 +33,11 @@
         </div>
     </div>
 </template>
+
+
+<script setup>
+var lendedBooks =[]
+
+
+</script>
 
