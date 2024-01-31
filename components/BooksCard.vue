@@ -22,6 +22,7 @@
         <div class=" my-1">
           <p class="text-center text-xl">{{ books.availableAmount }} left</p>
           <button @click="lendBook()" class="px-4 py-2">Låna bok</button>
+         
 
 
         </div>
@@ -42,9 +43,14 @@ const bookshelf = useBookshelfStore()
 
 
 const props = defineProps(["books"])
+const exists = ref(true)
 
 const books = props.books
 const book = books.book
+
+function removeBook() {
+
+} 
 
 function lendBook() {
   books.availableAmount -= 1
