@@ -8,4 +8,6 @@
 
 <script setup>
 const props = defineProps(["error"])
+
+console.log(props.error.stack)
 </script>

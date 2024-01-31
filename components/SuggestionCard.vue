@@ -10,11 +10,11 @@
     <div class="flex justify-end">
       <div class="flex justify-between space-x-6 items-center m-4">
         <img @click="upvote" src="/images/plus.png" class="size-10 aspect-square object-cover hover:cursor-pointer" />
-        <p class="text-4xl">{{ suggestion.getVotes() }}</p>
+        <p class="text-4xl">{{ suggestion.value.getVotes() }}</p>
         <img @click="downvote" src="/images/minus.png" class="size-10 aspect-square object-cover hover:cursor-pointer" />
       </div>
       <div class="flex items-center m-4">
-        <img @click="deleteSuggestion" src="/images/delete.png" class="size-8 aspect-square object-cover hover:cursor-pointer" />
+        <img @click="removeSuggestion" src="/images/remove.png" class="size-8 aspect-square object-cover hover:cursor-pointer" />
       </div>
     </div>
   </div>
@@ -30,13 +30,15 @@ const { suggestion } = defineProps([
   "suggestion"
 ])
 
+console.log("SuggestionCard: ", suggestion)
+
 const emit = defineEmits([
-  "delete",
+  "remove",
   "upvote",
   "downvote"
 ])
 
-const book = suggestion.getBook()
+const book = suggestion.value.getBook()
 
 const bookImage = ref("harry potter.jpg")
 
@@ -48,7 +50,7 @@ const downvote = () => {
   emit("downvote", suggestion)
 }
 
-const deleteSuggestion = () => {
-  emit("delete", suggestion)
+const removeSuggestion = () => {
+  emit("remove", suggestion)
 }
 </script>

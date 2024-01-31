@@ -3,8 +3,8 @@
     <div class="">
       <button @click="addSuggestion" class="bg-red-400">New</button>
     </div>
-    <div v-for="suggestion in filteredSuggestions" class="flex flex-col">
-      <SuggestionCard :suggestion="suggestion" @delete="deleteSuggestion" @upvote="upvote" @downvote="downvote" />
+    <div v-for="(suggestion, index) in suggestions.getSuggestions" :key="suggestion.id" class="flex flex-col">
+      <SuggestionCard :suggestion="suggestion" @remove="removeSuggestion" @upvote="upvoteSuggestion" @downvote="downvoteSuggestion" />
     </div>
   </div>
 </template>
@@ -13,45 +13,44 @@
 import Suggestion from "../classes/Suggestion.js"
 import Book from "../classes/Book.js"
 
+import {
+  watch
+} from "vue"
+
 const { $suggestions } = useNuxtApp()
 
 const suggestions = useSuggestionsStore()
 
-const filteredSuggestions = ref(suggestions.getSuggestions)
-
 $suggestions.read()
 .then(json => {
-  console.log(json)
-
   suggestions.fromJSON(json)
 })
 .catch(error => {
   console.log(error)
 })
 
+watch(suggestions.suggestions, () => {
+  $suggestions.write(suggestions.toJSON())
+})
+
 const addSuggestion = () => {
   // This is just for test
-  const book = new Book({title: "Harry Potter", author: "J.K. Rowling"})
+  const book = new Book({title: `Harry Potter ${Math.floor(Math.random() * 100)}`, author: "J.K. Rowling"})
   const suggestion = new Suggestion({book: book})
 
   suggestions.addSuggestion(suggestion)
-
-  filteredSuggestions.value = suggestions.getSuggestions
 }
 
-const deleteSuggestion = (suggestion) => {
-  // suggestions.deleteSuggestion(suggestion)
+// Input: suggestion: {id: int, value: Suggestion}
+const removeSuggestion = (suggestion) => {
+  suggestions.removeSuggestion(suggestion)
 }
 
-const upvote = (suggestion) => {
-  console.log("Upvoting: ", suggestion)
-  suggestion.upvote()
-  // Update the suggestion's component
+const upvoteSuggestion = (suggestion) => {
+  suggestions.upvoteSuggestion(suggestion)
 }
 
-const downvote = (suggestion) => {
-  console.log("Downvoting: ", suggestion)
-  suggestion.downvote()
-  // Update the suggestion's component
+const downvoteSuggestion = (suggestion) => {
+  suggestions.downvoteSuggestion(suggestion)
 }
 </script>
