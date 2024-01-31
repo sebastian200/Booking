@@ -1,6 +1,5 @@
 import { defineStore } from "pinia"
 
-import Book from "../classes/Book.js"
 import Suggestion from "../classes/Suggestion.js"
 
 // Compares if two deserialized suggestions are the same
