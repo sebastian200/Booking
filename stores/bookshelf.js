@@ -5,7 +5,7 @@ import Books from "../classes/Books.js"
 
 export const useBookshelfStore = defineStore("bookshelf", {
   state: () => ({
-    books: [],
+    books: [], //add id later
   }),
   getters: {
     getBooks() {
@@ -18,7 +18,7 @@ export const useBookshelfStore = defineStore("bookshelf", {
   actions: {
     addBooks(books) {
       // For some reason, books can only contain POJOs
-
+      id = this.books.length + 1
       this.books.push(books.toJSON())
       console.log(books.toJSON())
     },

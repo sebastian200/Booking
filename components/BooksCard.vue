@@ -53,7 +53,7 @@ function lendBook() {
     if (bookshelf.books[i].id == book.id) {
       bookshelf.books[i].availableAmount -= 1
       console.log(bookshelf.books[i])
-      bookshelf.toJSON()
+   
     }
   }
 
