@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   plugins: [
     "~/plugins/firebase.client.ts",
     "~/plugins/bookshelf.ts",
-    "~/plugins/suggestions.ts"
+    "~/plugins/suggestions.ts",
+    "~/plugins/books.ts"
   ]
 });
