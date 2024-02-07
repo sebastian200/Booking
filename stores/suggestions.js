@@ -2,99 +2,135 @@ import { defineStore } from "pinia"
 
 import Suggestion from "../classes/Suggestion.js"
 
-// Compares if two deserialized suggestions are the same
-const suggestionCompare = (first, second) => {
-  /*
-  let firstJson = first.toJSON()
-  let secondJson = second.toJSON()
-
-  return JSON.stringify(firstJson) === JSON.stringify(secondJson)
-  */
-  return first.id === second.id
-}
-
 export const useSuggestionsStore = defineStore("suggestions", {
   state: () => ({
-    // suggestions is an array of objects with an id and suggestion
-    // [{id: 0, suggestion: Suggestion}]
+    // For some reason, suggestions can only contain POJOs
     suggestions: []
   }),
   getters: {
+    /*
+     *
+     */
     getSuggestions() {
-      return this.suggestions.map(object => {
-        return {
-          ...object,
-          value: Suggestion.fromJSON(object.value)
-        }
+      return this.suggestions.map(suggestion => {
+        return Suggestion.fromJSON(suggestion)
       })
-    },
-    getNewId() {
-      let id = 0
-      for(let suggestion of this.suggestions.sort((a, b) => a.id - b.id)) {
-        if(id < suggestion.id) break
-        else id++
-      }
-      return id
     }
   },
   actions: {
-    // Returns the suggestion at index after deserializing it
+    /*
+     * Returns
+     * - Suggestion | the suggestion at the index 
+     * - null       | the index was out of bounds
+     */
     getSuggestion(index) {
-      let suggestion = this.suggestions[index]
-
-      suggestion.value = Suggestion.fromJSON(suggestion.value)
-
-      return suggestion
+      if(index < 0 || index > this.suggestions.length) {
+        return null
+      }
+      return Suggestion.fromJSON(this.suggestions[index])
     },
-    // Adds the suggestion after serializing it
+    /*
+     * Returns
+     * - index | the index of the suggestion with the hash
+     * - (-1)  | no suggestion has the inputted hash
+     */
+    getHashSuggestionIndex(hash) {
+      for(let index in this.suggestions) {
+        let suggestion = this.getSuggestion(index)
+
+        let suggestionHash = suggestion.getBook().getHash()
+
+        if(suggestionHash === hash) return index
+      }
+      return -1
+    },
+    /*
+     * Params:
+     * - suggestion | the suggestion to add
+     *
+     * Returns:
+     * - true  | the suggestion was successfully added
+     * - false | something went wrong
+     */
     addSuggestion(suggestion) {
-      // For some reason, suggestions can only contain POJOs
-      this.suggestions.push({
-        id: this.getNewId,
-        value: suggestion.toJSON()
-      })
-    },
-    removeSuggestion(suggestion) {
-      this.suggestions.forEach((current, index) => {
-        // Maybe add suggestionCompare
-        if(current.id == suggestion.id) {
-          this.suggestions.splice(index, 1)
-        }
-      })
-    },
-    upvoteSuggestion(suggestion) {
-      for(let index in this.suggestions) {
-        let current = this.getSuggestion(index)
+      let hash = suggestion.getBook().getHash()
 
-        if(suggestionCompare(current, suggestion)) {
-          current.value.upvote()
-
-          this.suggestions[index] = {
-            id: current.id,
-            value: current.value.toJSON()
-          }
+      for(let current of this.getSuggestions) {
+        if(current.getBook().getHash() === hash) {
+          return false
         }
       }
-    },
-    downvoteSuggestion(suggestion) {
-      for(let index in this.suggestions) {
-        let current = this.getSuggestion(index)
+      this.suggestions.push(suggestion.toJSON())
 
-        if(suggestionCompare(current, suggestion)) {
-          current.value.downvote()
-
-          this.suggestions[index] = {
-            id: current.id,
-            value: current.value.toJSON()
-          }
-        }
-      }
+      return true
     },
+    /*
+     * Params:
+     * - hash | the book hash for the effected suggestion
+     */
+    removeSuggestion(hash) {
+      let index = this.getHashSuggestionIndex(hash)
+
+      if(index === -1) return false
+
+      this.suggestions.splice(index, 1)
+
+      return true
+    },
+    /*
+     * Params:
+     * - hash | the book hash for the effected suggestion
+     *
+     * Returns
+     * - true  | the suggestion was successfully upvoted
+     * - false | something went wrong
+     */
+    upvoteSuggestion(hash) {
+      let index = this.getHashSuggestionIndex(hash)
+
+      let suggestion = this.getSuggestion(index)
+
+      if(suggestion == null) return false
+
+      suggestion.upvote()
+
+      this.suggestions[index] = suggestion.toJSON()
+
+      return true
+    },
+    /*
+     * Params:
+     * - hash | the book hash for the effected suggestion
+     *
+     * Returns
+     * - true  | the suggestion was successfully downvoted
+     * - false | something went wrong
+     */
+    downvoteSuggestion(hash) {
+      let index = this.getHashSuggestionIndex(hash)
+
+      let suggestion = this.getSuggestion(index)
+
+      if(suggestion == null) return false
+
+      suggestion.downvote()
+
+      this.suggestions[index] = suggestion.toJSON()
+
+      return true
+    },
+    /*
+     * 
+     */
     toJSON() {
       return {
         suggestions: this.suggestions
       }
     },
+    /*
+     * Params
+     * - json | the json object to deserialize
+     */
     fromJSON(json) {
       try {
         json.suggestions.map(suggestion => this.suggestions.push(suggestion))

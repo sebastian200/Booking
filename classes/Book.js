@@ -1,3 +1,17 @@
+/*
+ * Params
+ * - title  | the title of the book
+ * - author | the author of the book
+ *
+ * Returns
+ * - hash | the created book hash
+ */
+const createHash = (title, author) => {
+  let hash = (title + author)
+
+  return hash
+}
+
 export default class Book {
   constructor({ title, author, format, year, genres, language, rating }) {
     this.title = title
@@ -7,6 +21,9 @@ export default class Book {
     this.genres = genres
     this.language = language
     this.rating = rating
+    this.image = "harry potter.jpg"
+
+    this.hash = createHash(this.title, this.author)
   }
 
   getTitle() {
@@ -27,6 +44,22 @@ export default class Book {
 
   getGenres() {
     return this.genres
+  }
+
+  getLanguage() {
+    return this.language
+  }
+
+  getRating() {
+    return this.rating
+  }
+
+  getImage() {
+    return this.image
+  }
+
+  getHash() {
+    return this.hash
   }
 
   toJSON() {

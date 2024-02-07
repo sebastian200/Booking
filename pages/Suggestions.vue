@@ -41,16 +41,15 @@ const addSuggestion = () => {
   suggestions.addSuggestion(suggestion)
 }
 
-// Input: suggestion: {id: int, value: Suggestion}
-const removeSuggestion = (suggestion) => {
-  suggestions.removeSuggestion(suggestion)
+const removeSuggestion = (hash) => {
+  suggestions.removeSuggestion(hash)
 }
 
-const upvoteSuggestion = (suggestion) => {
-  suggestions.upvoteSuggestion(suggestion)
+const upvoteSuggestion = (hash) => {
+  suggestions.upvoteSuggestion(hash)
 }
 
-const downvoteSuggestion = (suggestion) => {
-  suggestions.downvoteSuggestion(suggestion)
+const downvoteSuggestion = (hash) => {
+  suggestions.downvoteSuggestion(hash)
 }
 </script>
