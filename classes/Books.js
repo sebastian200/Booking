@@ -19,8 +19,9 @@ export default class Books {
     return this.availableAmount
   }
 
-  borrowBook() {
+  lend() {
     this.availableAmount--;
+ 
   }
 
   returnBook() {
@@ -39,9 +40,10 @@ export default class Books {
     return { ...this }
   }
   static fromJSON(json) {
-    let books = new Books()
+    let books = new Books({})
 
     Object.assign(books, json)
+    books.book = Book.fromJSON(json.book)
 
     return books
   }

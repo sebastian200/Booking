@@ -3,6 +3,16 @@ import { defineStore } from "pinia"
 import Book from "../classes/Book.js"
 import Books from "../classes/Books.js"
 
+const booksCompare = (first, second) => {
+  /*
+  let firstJson = first.toJSON()
+  let secondJson = second.toJSON()
+
+  return JSON.stringify(firstJson) === JSON.stringify(secondJson)
+  */
+  return first.id === second.id
+}
+
 export const useBookshelfStore = defineStore("bookshelf", {
   state: () => ({
     books: [], //add id later
@@ -11,23 +21,90 @@ export const useBookshelfStore = defineStore("bookshelf", {
     getBooks() {
       return this.books.map(book => Book.fromJSON(book)) // convert to Book class object from json
     },
+    getSortedBooks(sortOption = title) {
+      const books = this.books
+      switch (sortOption.value) {
+        case 'title':
+          return books.sort((a, b) => a.book.title.localeCompare(b.book.title))
+        case 'pages':
+          return books.sort((a, b) => a.book.pages - b.book.pages)
+        case 'year':
+          return books.sort((a, b) => a.book.year - b.book.year)
+        default:
+          return books
+      }
+    }
 
   },
 
 
   actions: {
+
+    getBook(index) {
+      let books = this.books[index]
+      books.value = Books.fromJSON(books.value)
+
+      return books
+    },
+    
+    getNewId() {
+      let id = 0
+      for(let books of this.books.sort((a, b) => a.id - b.id)) {
+        if(id < books.id) break
+        else id++
+      }
+
+      return id
+    },
+
     addBooks(books) {
       // For some reason, books can only contain POJOs
-      // So we need to convert them to Book class objects
-      this.books.push(books.toJSON())
-      console.log(books.toJSON())
+      console.log(books)
+      this.books.push({
+        id: this.getNewId(),
+        value: books.toJSON()
+      })
+   
     },
-    removeBooks(title) {
-      for (let i = 0; i < this.listOfBooks.length; i++) {
-        if (this.listOfBooks[i].title === title) {
-          this.listOfBooks.splice(i, 1); // remove the book
+
+    removeBooks(books) {
+      this.books.forEach((current, index) => {
+        // Maybe add booksCompare
+        if(current.id == books.id) {
+          this.books.splice(index, 1)
+        }
+      })
+    },
+
+    returnBook(books) {
+      for(let index in this.books) {
+       
+        
+        let current = this.getBook(index)
+       
+        if(booksCompare(current, books)) {
+          current.value.returnBook()
+          console.log("hello")
+          this.books[index] = {
+            id: current.id,
+            value: current.value.toJSON()
+          }
         }
       }
+    },
+    lendBook(books) {
+      for(let index in this.books) {
+        let current = this.getBook(index)
+    
+        if(booksCompare(current, books)) {
+          current.value.lend()
+          this.books[index] = {
+            id: current.id,
+            value: current.value.toJSON()
+          }
+        }
+      }
+      
     },
 
     toJSON() { // convert to json
@@ -64,56 +141,37 @@ export const useBookshelfStore = defineStore("bookshelf", {
       
     },
 
-    filterBooks(title = "", author = "", type = "", pages = 0, genres = [],) {
-      let filteredBooks = this.listOfBooks;
-      if (title !== "") {
-        filteredBooks = filteredBooks.filter(book => book.title === title);
-      }
-      if (author !== "") {
-        filteredBooks = filteredBooks.filter(book => book.author === author);
-      }
-      if (type !== "") {
-        filteredBooks = filteredBooks.filter(book => book.type === type);
-      }
-      if (pages !== 0) {
-        filteredBooks = filteredBooks.filter(book => book.pages >= pages);
-      }
-      if (genres.length !== 0) {
-        filteredBooks = filteredBooks.filter(book => genres.includes(book.genre));
-      }
-      return filteredBooks;
+filterBooks(title = '', author = '', type = '', minPages = 0, maxPages = Infinity, genres = []) {
+  let filteredBooks = this.books;
+  if (filteredBooks === undefined) {
+    console.log('undefined')
+    return [];
+  }
+  console.log('hello')
+  if (title !== '') {
 
-    },
-    SortBooks(type, reversed = false) {
-      let sortedBooks = this.listOfBooks;
-      if (type === "title") {
-        sortedBooks.sort(function (a, b) {
-          if (a.title < b.title) { return -1; }
-          if (a.title > b.title) { return 1; }
-          return 0;
-        });
-      }
-      if (type === "author") {
-        sortedBooks.sort(function (a, b) {
-          if (a.author < b.author) { return -1; }
-          if (a.author > b.author) { return 1; }
-          return 0;
-        });
-      }
-      if (type === "pages") {
-        sortedBooks.sort(function (a, b) {
-          if (a.pages < b.pages) { return -1; }
-          if (a.pages > b.pages) { return 1; }
-          return 0;
-        });
-      }
-      if (type === "year") {
-        // year is a number
-        sortedBooks.sort(function (a, b) {
-          return a.year - b.year;
-        });
-      }
-    }
+    filteredBooks = filteredBooks.filter(books => books.value.book.title.startsWith(title));
+    console.log(filteredBooks)
+  }
+  if (author !== '') {
+    filteredBooks = filteredBooks.filter(books => books.value.book.author.startsWith(author));
+  }
+  if (type !== '') {
+    filteredBooks = filteredBooks.filter(books => books.value.book.type === type);
+  }
+  if (minPages !== 0) {
+    filteredBooks = filteredBooks.filter(books => books.value.book.pages >= minPages);
+  }
+  if (maxPages !== Infinity) {
+    filteredBooks = filteredBooks.filter(books => books.value.book.pages <= maxPages);
+  }
+  if (genres.length > 0) {
+    filteredBooks = filteredBooks.filter(books => books.value.book.genres.some(genre => genres.includes(genre)));
+  }
+  return filteredBooks;
+}
+
+    
   },
 
 })

@@ -13,6 +13,7 @@
             <div class="">
             <div class="flex justify-between">
                 <input type="number" min="1900" max="2099" step="1" placeholder="år" v-model="year">
+                <select multiple v-model="selectedYears"> <option v-for="year in years" :value="year">{{ year }}</option> </select>
                 <input type="number" placeholder="Kopior" v-model="copies">
             </div>
             <div class="flex justify-around">
@@ -51,14 +52,15 @@ const { $bookshelf } = useNuxtApp()
 const bookshelf = useBookshelfStore()
 
 
+const years = Array.from({ length: new Date().getFullYear() - 1899 }, (_, i) => 1900 + i);
 
 const title = ref('');
 const author = ref('');
-const year = ref(null);
-const pages = ref(null);
-const copies = ref(null);
-const genres = ref(null);
-const language = ref(null);
+const year = ref(0);
+const pages = ref(0);
+const copies = ref(0);
+const genres = ref([]);
+const language = ref('svenska');
 const format = ref('');
 
 const imageUrl = ref(null);
@@ -93,8 +95,7 @@ function addBook() {
 })
 
     bookshelf.addBooks(books)
-    
-    console.log(books)
+
 
 }
 </script>

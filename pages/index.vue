@@ -36,13 +36,14 @@
     </div>
     <div id="listOfBooks" class="">
 
-      <li v-for="book in sortedBooks.value" class="flex flex-wrap">
-        <BooksCard :books=book />
+      <li v-for="book in getSortedBooks(sortOption)" :key="book.id" class="flex flex-wrap">
+        <BooksCard v-if="book.value.availableAmount > 0" :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
+        <div>{{book}} hello</div>
       </li>
     </div>
-
+    <div>hello</div>
   </div>
-</template>
+</template> 
 
 <script setup>
 import { ref, computed } from 'vue'
@@ -53,9 +54,8 @@ const { $bookshelf } = useNuxtApp()
 const bookshelf = useBookshelfStore()
 
 const showFilter = ref(false)
-const sortOption = ref('title')
-const books = bookshelf.books
-
+const sortOption = ref('year')
+var books = bookshelf.books
 
 
 
@@ -63,35 +63,49 @@ function toggleFilter() {
   showFilter.value = !showFilter.value
 }
 
+console.log('hello')
 
-const sortedBooks = computed(() => {
-  const books = bookshelf.books
-  switch (sortOption.value) {
-    case 'title':
-      return books.sort((a, b) => a.book.title.localeCompare(b.book.title))
-    case 'pages':
-      return books.sort((a, b) => a.book.pages - b.book.pages)
-    case 'year':
-      return books.sort((a, b) => a.book.year - b.book.year)
-    default:
-      return books
-  }
-})
+function getSortedBooks(sortOption, books = bookshelf.books) {
+      
+      switch (sortOption) {
+        case 'title':
+          return books.sort((a, b) => a.value.book.title.localeCompare(b.value.book.title))
+        case 'pages':
+          return books.sort((a, b) => a.value.book.pages - b.value.book.pages)
+        case 'year':
+          return books.sort((a, b) => a.value.book.year - b.value.book.year)
+        default:
+          return books
+        case 'rating':
+          return books.sort((a, b) => a.value.book.rating - b.value.book.rating)
+      }
+}
+console.log(bookshelf.filterBooks('h'))
 
-console.log(sortedBooks.value)
+// Input: suggestion: {id: int, value: Suggestion}
+const removeBooks = (books) => {
+  bookshelf.removeBook(books)
+}
 
+const returnBook = (books) => {
+  bookshelf.returnBook(books)
+  console.log("hllo")
+}
 
+const lendBook = (books) => {
+  bookshelf.lendBook(books)  
+}
 
 $bookshelf.read()
-  .then(json => {
-    bookshelf.fromJSON(json)
-    return $bookshelf.write(bookshelf.toJSON())
+.then(json => {
+  bookshelf.fromJSON(json)
+})
+.catch(error => {
+  console.log(error)
+})
 
-  })
-  .then(json => {
-    console.log(json)
-  })
-  .catch(error => {
-    console.log("Could not read bookshelf json")
-  })
+$bookshelf.write(bookshelf.toJSON())
+
+
+
 </script>
