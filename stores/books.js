@@ -22,7 +22,7 @@ export const useBooksStore = defineStore("books", {
      */
     getBook(hash) {
       for(let book of this.getBooks) {
-        if(book.getHash() === hash) {
+        if(book?.getHash() === hash) {
           return book
         }
       }
@@ -74,10 +74,9 @@ export const useBooksStore = defineStore("books", {
      */
     fromJSON(json) {
       try {
-        json.books.map(book => this.books.push(book))
+        this.books = json.books
       }
       catch(error) {
-        console.log("Could not deserialize json to books")
         console.log(error)
       }
     }

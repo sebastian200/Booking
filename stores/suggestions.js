@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 
+import { useBooksStore } from "~/stores/books.js"
+
 import Suggestion from "../classes/Suggestion.js"
 
 export const useSuggestionsStore = defineStore("suggestions", {
@@ -38,7 +40,7 @@ export const useSuggestionsStore = defineStore("suggestions", {
       for(let index in this.suggestions) {
         let suggestion = this.getSuggestion(index)
 
-        let suggestionHash = suggestion.getBook().getHash()
+        let suggestionHash = suggestion?.getBook()?.getHash()
 
         if(suggestionHash === hash) return index
       }
@@ -56,7 +58,7 @@ export const useSuggestionsStore = defineStore("suggestions", {
       let hash = suggestion.getBook().getHash()
 
       for(let current of this.getSuggestions) {
-        if(current.getBook().getHash() === hash) {
+        if(current?.getBook()?.getHash() === hash) {
           return false
         }
       }
@@ -74,6 +76,24 @@ export const useSuggestionsStore = defineStore("suggestions", {
       if(index === -1) return false
 
       this.suggestions.splice(index, 1)
+
+      // Remove the book all toghether
+      const books = useBooksStore()
+      const { $books } = useNuxtApp()
+
+      // Read the current books
+      $books.read()
+      .then(json => {
+        books.fromJSON(json)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+      books.removeBook(hash)
+
+      // Write the updated books
+      $books.write(books.toJSON())
 
       return true
     },
@@ -133,10 +153,9 @@ export const useSuggestionsStore = defineStore("suggestions", {
      */
     fromJSON(json) {
       try {
-        json.suggestions.map(suggestion => this.suggestions.push(suggestion))
+        this.suggestions = json.suggestions
       }
       catch(error) {
-        console.log("Could not deserialize json to suggestions")
         console.log(error)
       }
     }

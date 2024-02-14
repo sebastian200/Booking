@@ -3,7 +3,7 @@
     <div class="">
       <button @click="addSuggestion" class="bg-red-400">New</button>
     </div>
-    <div v-for="(suggestion, index) in suggestions.getSuggestions" :key="suggestion.id" class="flex flex-col">
+    <div v-for="(suggestion, index) in suggestions.getSuggestions" :key="suggestion.hash" class="flex flex-col">
       <SuggestionCard :suggestion="suggestion" @remove="removeSuggestion" @upvote="upvoteSuggestion" @downvote="downvoteSuggestion" />
     </div>
   </div>
@@ -14,27 +14,39 @@ import Suggestion from "../classes/Suggestion.js"
 import Book from "../classes/Book.js"
 
 import {
-  watch
+  watch,
+  onMounted
 } from "vue"
 
-const { $suggestions } = useNuxtApp()
+const { $books, $suggestions } = useNuxtApp()
 
 const suggestions = useSuggestionsStore()
+const books = useBooksStore()
 
-$suggestions.read()
-.then(json => {
-  suggestions.fromJSON(json)
-})
-.catch(error => {
-  console.log(error)
-})
+onMounted(() => {
+  $books.read()
+  .then(json => {
+    books.fromJSON(json)
+  })
+  .catch(error => {
+    console.log(error)
+  })
 
-watch(suggestions.suggestions, () => {
-  $suggestions.write(suggestions.toJSON())
+  $suggestions.read()
+  .then(json => {
+    suggestions.fromJSON(json)
+
+    // Only setup watcher after suggestions is loaded correctly
+    watch(suggestions.suggestions, () => {
+      $suggestions.write(suggestions.toJSON())
+    })
+  })
+  .catch(error => {
+    console.log(error)
+  })
 })
 
 const addSuggestion = () => {
-  // This is just for test
   const book = new Book({title: `Harry Potter ${Math.floor(Math.random() * 100)}`, author: "J.K. Rowling"})
   const suggestion = new Suggestion({book: book})
 
