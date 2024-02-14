@@ -114,7 +114,8 @@ export const useBookshelfStore = defineStore("bookshelf", {
     },
     fromJSON(json) { // convert from json
       try {
-        json.books.map(book => this.books.push(book))
+
+        this.books = json.books
       }
       catch (error) {
         console.log("Could not deserialize json to books")
@@ -141,13 +142,21 @@ export const useBookshelfStore = defineStore("bookshelf", {
       
     },
 
-filterBooks(title = '', author = '', type = '', minPages = 0, maxPages = Infinity, genres = []) {
+
+filterBooks(formData) {
+
+  let title = formData.title
+  let author = formData.author
+  let type = formData.type
+  let minPages = formData.minPages
+  let maxPages = formData.maxPages
+  let genres = formData.genres
   let filteredBooks = this.books;
   if (filteredBooks === undefined) {
     console.log('undefined')
     return [];
   }
-  console.log('hello')
+  console.log(title)
   if (title !== '') {
 
     filteredBooks = filteredBooks.filter(books => books.value.book.title.startsWith(title));

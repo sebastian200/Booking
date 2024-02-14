@@ -27,8 +27,32 @@
           <option value="italian">Italian</option>
         </select>
       </div>
-      <Slider title="Sidor" v-model="pages"/>
-      <Slider title="År" v-model="Year"/>
+      <div>
+        <div>Sidor</div>
+        <div class="flex">
+          <label for="minPages" class="m-1 text-xs">MinPages</label>
+          <input type="range" id="minPages" v-model="minPages" min="0" max="1000" @input="emitSliderValues" />
+          <span class="m-1 text-xs">{{ minPages }}</span>
+        </div>
+        <div class="flex">
+          <label for="maxPages" class="m-1 text-xs">MaxPages</label>
+          <input type="range" id="maxPages" v-model="maxPages" min="0" max="1000" @input="emitSliderValues" />
+          <span class="m-1 text-xs">{{ maxPages }}</span>
+        </div>
+      </div>
+      <div>
+        <div>År</div>
+        <div class="flex">
+          <label for="minPages" class="m-1 text-xs">Min</label>
+          <input type="range" id="minPages" v-model="minYear" min="1900" max="2023" @input="emitSliderValues" />
+          <span class="m-1 text-xs">{{ minYear }}</span>
+        </div>
+        <div class="flex">
+          <label for="maxPages" class="m-1 text-xs">Max</label>
+          <input type="range" id="maxPages" v-model="maxYear" min="1900" max="2023" @input="emitSliderValues" />
+          <span class="m-1 text-xs">{{ maxYear }}</span>
+        </div>
+      </div>
 
 <div id="rating">
   <p>Betyg</p>
@@ -48,16 +72,21 @@
 
 <script setup>
 import { ref } from 'vue';
+// Import the EventBus
 
 const title = ref('');
 const author = ref('');
 const selectedGenres = ref([]);
 const selectedLanguage = ref('english');
-const pages = ref(0);
-const year = ref(1900);
+const minPages = ref(0);
+const maxPages = ref(1000);
+const minYear = ref(1900);
+const maxYear = ref(2023);
 const rating = ref(0);
 
-
+const emit = defineEmits([
+'submit',
+])
 
 function submitForm() {
   const formData = {
@@ -65,19 +94,19 @@ function submitForm() {
     author: author.value,
     genres: selectedGenres.value,
     language: selectedLanguage.value,
-    pages: pages.value
+    minPages: minPages.value,
+    maxPages: maxPages.value,
+    minYear: minYear.value,
+    maxYear: maxYear.value,
+    rating: rating.value,
   };
+
 
   // Emit the form data to the parent component
   // You can use an event bus or emit it directly to the parent component using $emit
-  this.$emit('formSubmitted', formData);
   
 
-  // Example using event bus:
-  // EventBus.$emit('formSubmitted', formData);
-
-  // Example using $emit:
-  // this.$emit('formSubmitted', formData);
+  emit('submit', formData);
 }
 </script>
 

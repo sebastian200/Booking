@@ -12,12 +12,18 @@
 
             <div class="">
             <div class="flex justify-between">
-                <input type="number" min="1900" max="2099" step="1" placeholder="år" v-model="year">
-                <select multiple v-model="selectedYears"> <option v-for="year in years" :value="year">{{ year }}</option> </select>
+               
+                <select multiple v-model="year"> <option v-for="year in years" :value="year">{{ year }}</option> </select>
                 <input type="number" placeholder="Kopior" v-model="copies">
             </div>
             <div class="flex justify-around">
-                <input class="w-1/2" type="text" placeholder="språk" v-model="language">
+                <select v-model="language">
+                    <option value="english">English</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="french">French</option>
+                    <option value="german">German</option>
+                    <option value="italian">Italian</option>
+                  </select>
                 <input class="w-1/3" type="number" placeholder="Sidor" v-model="pages">
             </div>
             </div>

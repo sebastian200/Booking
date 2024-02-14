@@ -18,7 +18,7 @@
           <button class="" @click="toggleFilter">▼ Filter</button>
         </div>
         <div v-if="showFilter">
-          <Filter />
+          <Filter @submit="filterBooks"/>
         </div>
       </div>
       
@@ -36,7 +36,7 @@
     </div>
     <div id="listOfBooks" class="">
 
-      <li v-for="book in getSortedBooks(sortOption)" :key="book.id" class="flex flex-wrap">
+      <li v-for="book in books" :key="book.id" class="flex flex-wrap">
         <BooksCard v-if="book.value.availableAmount > 0" :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
         <div>{{book}} hello</div>
       </li>
@@ -63,7 +63,11 @@ function toggleFilter() {
   showFilter.value = !showFilter.value
 }
 
-console.log('hello')
+
+const filterBooks = (formData) => {
+
+  books = bookshelf.filterBooks(formData)
+}
 
 function getSortedBooks(sortOption, books = bookshelf.books) {
       
@@ -80,7 +84,7 @@ function getSortedBooks(sortOption, books = bookshelf.books) {
           return books.sort((a, b) => a.value.book.rating - b.value.book.rating)
       }
 }
-console.log(bookshelf.filterBooks('h'))
+
 
 // Input: suggestion: {id: int, value: Suggestion}
 const removeBooks = (books) => {

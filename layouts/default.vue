@@ -86,7 +86,7 @@ const showDropdown = ref(false)
 
 function toggleDropdown() {
   showDropdown.value = !showDropdown.value
-  console.log(showDropdown.value)
+
 }
 
 </script>
