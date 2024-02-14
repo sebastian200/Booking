@@ -47,7 +47,7 @@ onMounted(() => {
 })
 
 const addSuggestion = () => {
-  const book = new Book({title: `Harry Potter ${Math.floor(Math.random() * 100)}`, author: "J.K. Rowling"})
+  const book = new Book({title: `Harry Potter ${Math.floor(Math.random() * 100)}`, author: "J.K. Rowling", genres: ["pop", "kids"]})
   const suggestion = new Suggestion({book: book})
 
   suggestions.addSuggestion(suggestion)
