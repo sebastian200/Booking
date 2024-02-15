@@ -142,8 +142,25 @@ export const useBookshelfStore = defineStore("bookshelf", {
       
     },
 
+search(title) {
+  let filteredBooks = this.books.slice();
+  if (title !== '') {
 
-filterBooks(formData) {
+    filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
+
+  }
+  return filteredBooks;
+},
+
+filterBooks(formData = {
+  title: '',
+  author: '',
+  type: '',
+  minPages: 0,
+  maxPages: Infinity,
+  genres: []
+
+}, books) {
 
   let title = formData.title
   let author = formData.author
@@ -151,19 +168,21 @@ filterBooks(formData) {
   let minPages = formData.minPages
   let maxPages = formData.maxPages
   let genres = formData.genres
-  let filteredBooks = this.books;
-  if (filteredBooks === undefined) {
+  let data = books;
+  if (data === undefined || data.value.length === 0) {
     console.log('undefined')
     return [];
   }
-  console.log(title)
+  let filteredBooks = data.value.slice();
+  console.log(formData)
+
   if (title !== '') {
 
-    filteredBooks = filteredBooks.filter(books => books.value.book.title.startsWith(title));
-    console.log(filteredBooks)
+    filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
+
   }
   if (author !== '') {
-    filteredBooks = filteredBooks.filter(books => books.value.book.author.startsWith(author));
+    filteredBooks = filteredBooks.filter(books => books.value.book.author.includes(author));
   }
   if (type !== '') {
     filteredBooks = filteredBooks.filter(books => books.value.book.type === type);
@@ -174,9 +193,11 @@ filterBooks(formData) {
   if (maxPages !== Infinity) {
     filteredBooks = filteredBooks.filter(books => books.value.book.pages <= maxPages);
   }
+
   if (genres.length > 0) {
     filteredBooks = filteredBooks.filter(books => books.value.book.genres.some(genre => genres.includes(genre)));
   }
+
   return filteredBooks;
 }
 

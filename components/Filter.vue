@@ -73,20 +73,29 @@
 <script setup>
 import { ref } from 'vue';
 // Import the EventBus
+const props = defineProps(['data']);
 
-const title = ref('');
-const author = ref('');
-const selectedGenres = ref([]);
-const selectedLanguage = ref('english');
-const minPages = ref(0);
-const maxPages = ref(1000);
-const minYear = ref(1900);
-const maxYear = ref(2023);
-const rating = ref(0);
+let title = ref(props.data.title);
+let author = ref(props.data.author);
+let selectedGenres = ref(props.data.genres);
+let selectedLanguage = ref(props.data.language);
+let minPages = ref(props.data.minPages);
+let maxPages = ref(props.data.maxPages);
+let minYear = ref(props.data.minYear);
+let maxYear = ref(props.data.maxYear);
+let rating = ref(props.data.rating);
 
 const emit = defineEmits([
 'submit',
 ])
+
+console.log(title)
+
+
+
+
+
+
 
 function submitForm() {
   const formData = {
@@ -100,6 +109,7 @@ function submitForm() {
     maxYear: maxYear.value,
     rating: rating.value,
   };
+
 
 
   // Emit the form data to the parent component

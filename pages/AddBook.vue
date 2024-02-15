@@ -18,11 +18,13 @@
             </div>
             <div class="flex justify-around">
                 <select v-model="language">
-                    <option value="english">English</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                    <option value="german">German</option>
-                    <option value="italian">Italian</option>
+                    
+                    <option value="swedish">Svenska</option>
+                    <option value="english">Engelska</option>
+                    <option value="spanish">Spanska</option>
+                    <option value="french">Franska</option>
+                    <option value="german">Tyska</option>
+                    <option value="italian">Italienska</option>
                   </select>
                 <input class="w-1/3" type="number" placeholder="Sidor" v-model="pages">
             </div>

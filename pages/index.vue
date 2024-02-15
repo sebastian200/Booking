@@ -14,29 +14,32 @@
     <div id="bookSorting" class="fixed bg-slate-50 shadow w-full ">
       <div class="">
         <div class="shadow flex justify-around pb-4 p-1 w-full ">
-          <input type="text" placeholder="sök" class="m-1 p-1">
+          <input v-model="title" type="text" placeholder="sök" class="m-1 p-1" >
           <button class="" @click="toggleFilter">▼ Filter</button>
         </div>
         <div v-if="showFilter">
-          <Filter @submit="filterBooks"/>
+          <Filter :data=newFormData  @submit="filterBooks"/>
         </div>
       </div>
       
     </div>
     <div class="h-20"></div>
     <div class="flex justify-between w-screen">
-      <div class=" text-sm text-center m-1 text ">{{ books.length }}+ resultat</div>
+      <div class=" text-sm text-center m-1 text ">{{ booksModified.length }}+ resultat</div>
       <div class="  mx-5">
-        <select v-model="sortOption" class="bg-slate-600 rounded-md p-0.5 px-2 ">
-          <option value="title" >Title</option>
-          <option value="pages">Pages</option>
-          <option value="year">Year</option>
+        <select v-model="sortOption" class="bg-slate-600 rounded-md p-0.5 px-2 "> 
+          <option value="title" >Titel A-Ö</option>
+          <option value="title-reversed">Titel A-Ö </option>
+          <option value="pages">Sidor stigande</option>
+          <option value="pages-reversed">Sidor fallande</option>
+          <option value="year">Älst</option>
+          <option value="year-reversed">Nyast</option>
         </select>
       </div>
     </div>
     <div id="listOfBooks" class="">
 
-      <li v-for="book in books" :key="book.id" class="flex flex-wrap">
+      <li v-for="book in booksModified" :key="book.id" class="flex flex-wrap"> 
         <BooksCard v-if="book.value.availableAmount > 0" :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
         <div>{{book}} hello</div>
       </li>
@@ -54,34 +57,56 @@ const { $bookshelf } = useNuxtApp()
 const bookshelf = useBookshelfStore()
 
 const showFilter = ref(false)
-const sortOption = ref('year')
-var books = bookshelf.books
+const sortOption = ref('title')
+const title = ref('')
+let newFormData = {title: '', author: '', type: '', minPages: 0, maxPages: Infinity, genres: [], language: '', minYear: 1900, maxYear: 2023, rating: 0}
+var books = ref(bookshelf.books.slice())
 
 
 
 function toggleFilter() {
   showFilter.value = !showFilter.value
 }
+const booksModified = computed(() => {
+  newFormData.title = title.value
+  let modifiedBooks = bookshelf.filterBooks(newFormData, books)
+  console.log(newFormData)
+  console.log(modifiedBooks)
+  modifiedBooks = getSortedBooks(sortOption.value, modifiedBooks)
+  return modifiedBooks
+    });
+
 
 
 const filterBooks = (formData) => {
 
-  books = bookshelf.filterBooks(formData)
+  newFormData = formData
+  
+  console.log(newFormData)
 }
 
-function getSortedBooks(sortOption, books = bookshelf.books) {
+function getSortedBooks(sortOption, modifiedBooks) {
       
       switch (sortOption) {
         case 'title':
-          return books.sort((a, b) => a.value.book.title.localeCompare(b.value.book.title))
+          return modifiedBooks.sort((a, b) => a.value.book.title.localeCompare(b.value.book.title))
+        case 'title-reversed':
+          return modifiedBooks.sort((a, b) => b.value.book.title.localeCompare(a.value.book.title))
         case 'pages':
-          return books.sort((a, b) => a.value.book.pages - b.value.book.pages)
+          return modifiedBooks.sort((a, b) => a.value.book.pages - b.value.book.pages)
+        case 'pages-reversed':
+          return modifiedBooks.sort((a, b) => b.value.book.pages - a.value.book.pages)
         case 'year':
-          return books.sort((a, b) => a.value.book.year - b.value.book.year)
-        default:
-          return books
+          return modifiedBooks.sort((a, b) => a.value.book.year - b.value.book.year)
+        case 'year-reversed':
+          return modifiedBooks.sort((a, b) => b.value.book.year - a.value.book.year)
         case 'rating':
-          return books.sort((a, b) => a.value.book.rating - b.value.book.rating)
+          return modifiedBooks.sort((a, b) => a.value.book.rating - b.value.book.rating)
+        case 'rating-reversed':
+          return modifiedBooks.sort((a, b) => b.value.book.rating - a.value.book.rating)
+        default:
+          console.log(filteredBooks, newFormData)
+          return modifiedBooks
       }
 }
 

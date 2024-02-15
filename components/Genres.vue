@@ -2,10 +2,34 @@
     <div>
         <select name="countries" id="countries" multiple>
 
-            <option class=" text-gray-800" value="1">Afghanistan</option>
-            <option class="text-gray-800" value="2">Australia</option>
-            <option class="text-gray-800" value="3">Germany</option>
-            <option class="text-gray-800" value="4">Canada</option>
+<option value="fantasy">Fantasy</option>
+<option value="science-fiction">Science Fiction</option>
+<option value="mystery">Mysterium</option>
+<option value="romance">Romantik</option>
+<option value="thriller">Thriller</option>
+<option value="horror">Skräck</option>
+<option value="historical-fiction">Historisk Skönlitteratur</option>
+<option value="biography">Biografi</option>
+<option value="self-help">Självhjälp</option>
+<option value="adventure">Äventyr</option>
+<option value="dystopian">Dystopi</option>
+<option value="young-adult">Ung Vuxen</option>
+<option value="crime">Brott</option>
+<option value="non-fiction">Fakta</option>
+<option value="poetry">Poesi</option>
+<option value="comedy">Komedi</option>
+<option value="drama">Drama</option>
+<option value="action">Action</option>
+<option value="historical">Historisk</option>
+<option value="western">Västern</option>
+<option value="fantasy-romance">Fantasy Romance</option>
+<option value="sci-fi-fantasy">Sci-Fi Fantasy</option>
+<option value="psychological-thriller">Psychological Thriller</option>
+<option value="paranormal">Paranormal</option>
+<option value="urban-fantasy">Urban Fantasy</option>
+<option value="historical-romance">Historical Romance</option>
+
+
             <option class="text-gray-800" value="5">Russia</option>
         </select>
     </div>
