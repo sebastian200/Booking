@@ -8,7 +8,7 @@
       <nuxt-link to="/BookPopup">
         <div class="p-1 flex">
 
-          <img class=" h-20 rounded-md" src="../assets//Images/booksImmages/nedladdning (1).jpg" alt="">
+          <img class=" h-20 rounded-md" :src="book.imageURL" alt="">
           <div id="bookText" class="my-3 mx-4">
             <p id="author" class="text-center text-lg font-bold">{{book.title}}</p>
               <p id="title" class=" text-center ">{{ book.author }}</p>

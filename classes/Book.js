@@ -1,5 +1,5 @@
 export default class Book {
-  constructor({ title, author, format, year, genres, language, rating, pages }) {
+  constructor({ title, author, format, year, genres, language, rating, pages, imageURL }) {
     this.title = title
     this.author = author
     this.format = format
@@ -8,6 +8,7 @@ export default class Book {
     this.language = language
     this.rating = rating
     this.pages = pages
+    this.imageURL = imageURL
   }
 
   getTitle() {

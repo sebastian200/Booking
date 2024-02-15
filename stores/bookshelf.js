@@ -59,7 +59,7 @@ export const useBookshelfStore = defineStore("bookshelf", {
 
     addBooks(books) {
       // For some reason, books can only contain POJOs
-      console.log(books)
+    
       this.books.push({
         id: this.getNewId(),
         value: books.toJSON()

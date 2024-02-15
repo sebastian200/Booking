@@ -2,7 +2,7 @@
     <div class="">
         <form action="" class=" flex flex-wrap justify-center px-1">
             <input type="file" @change="handleFileChange" accept="image/*">
-            <img v-if="imageUrl" :src="imageUrl" alt="Selected Image">
+            <img v-if="imageURL" :src="imageURL" alt="Selected Image">
 
             <div>{{ title }}</div>
     
@@ -34,11 +34,18 @@
 
             <div></div>
 
-            <select v-model="bookType" >
+            <select v-model="format" >
                 <option value="">Typ</option>
                 <option value="pocket">Pocket</option>
                 <option value="hardcover">Hardcover</option>
             </select>
+            <div id="rating">
+                <p>Betyg</p>
+                <div class="rating-slider flex">
+                  <input type="range" min="0" max="5" step="0.5" v-model="rating" /> 
+                  <div class="rating-label">{{ rating }}</div>
+                </div>
+              </div>
             <div class="flex justify-center">
                 <div id="button" @click="addBook()">Lägg till</div>
             </div>
@@ -70,8 +77,9 @@ const copies = ref(0);
 const genres = ref([]);
 const language = ref('svenska');
 const format = ref('');
+const rating = ref(0);
 
-const imageUrl = ref(null);
+const imageURL = ref('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg');
 const bookType = ref('');
 
 const handleFileChange = (event) => {
@@ -93,8 +101,11 @@ function addBook() {
         year: year.value,
         pages:pages.value, 
         genres: genres.value,
-         format: bookType.value,
+        format: bookType.value,
         language: language.value,
+        imageURL: imageURL.value,
+        rating: rating.value,
+
 })
     
     const books = new Books({
