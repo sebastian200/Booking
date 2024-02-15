@@ -8,7 +8,7 @@
     <div class="flex flex-col items-center">
       <div class="flex flex-col items-center max-w-96 text-2xl">
         <p>{{ book?.getTitle() }}</p>
-        <img :src="`images/books/${book?.getImage()}`" class="aspect-square object-cover m-2"/>
+        <img :src="`images/books/${book?.getImage() ?? 'missing.png'}`" class="aspect-square object-cover m-2"/>
       </div>
       <div>
         <p>{{ book?.getRating() }}</p>

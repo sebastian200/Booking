@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div class="">
-      <button @click="addSuggestion" class="bg-red-400">New</button>
+      <NuxtLink to="new?type=suggestions" class="bg-red-400">New</NuxtLink>
     </div>
     <div v-for="(suggestion, index) in suggestions.getSuggestions" :key="suggestion.hash" class="flex flex-col">
       <SuggestionCard :suggestion="suggestion" @remove="removeSuggestion" @upvote="upvoteSuggestion" @downvote="downvoteSuggestion" />
@@ -45,13 +45,6 @@ onMounted(() => {
     console.log(error)
   })
 })
-
-const addSuggestion = () => {
-  const book = new Book({title: `Harry Potter ${Math.floor(Math.random() * 100)}`, author: "J.K. Rowling", genres: ["pop", "kids"]})
-  const suggestion = new Suggestion({book: book})
-
-  suggestions.addSuggestion(suggestion)
-}
 
 const removeSuggestion = (hash) => {
   suggestions.removeSuggestion(hash)

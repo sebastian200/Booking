@@ -153,7 +153,7 @@ export const useSuggestionsStore = defineStore("suggestions", {
      */
     fromJSON(json) {
       try {
-        this.suggestions = json.suggestions
+        this.suggestions = json.suggestions ?? []
       }
       catch(error) {
         console.log(error)
