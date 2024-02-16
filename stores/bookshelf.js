@@ -181,6 +181,7 @@ filterBooks(formData = {
   let minPages = formData.minPages
   let maxPages = formData.maxPages
   let genres = formData.genres
+  let format = formData.format
   let data = books;
   if (data === undefined || data.value.length === 0) {
     console.log('undefined')

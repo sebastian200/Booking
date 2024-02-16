@@ -12,15 +12,16 @@
 
 <template>
   <div>
-    <div id="bookSorting" class="fixed bg-slate-50 shadow w-full ">
-      <div class="">
+    <div id="bookSorting" class="fixed   w-full ">
+      <div class="bg-slate-50 ">
         <div class=" flex justify-around pb-4 p-1 w-full ">
-          <input v-model="title" type="text" placeholder="sök" class="m-1 p-1">
-          <button class="" @click="toggleFilter">▼ Filter</button>
+          <input v-model="title" type="text" placeholder="sök" class="m-1 p-1 w-1/2 border-none border border-slate-400">
+          <div class="p-2"  @click="toggleFilter">▼ Filter</div>
         </div>
-        <div v-if="showFilter">
-          <Filter :data=newFormData @submit="filterBooks" />
-        </div>
+
+      </div>
+      <div class="md:w-1/2 newBoder lg:w-1/3 xl:w-1/4 " v-if="showFilter">
+        <Filter class=" " :data=newFormData @submit="filterBooks" />
       </div>
 
     </div>
@@ -28,7 +29,7 @@
     <div class="flex justify-between w-screen">
       <div class=" text-sm text-center m-1 text ">{{ booksModified.length }}+ resultat</div>
       <div class="  mx-5">
-        <select v-model="sortOption" class="bg-slate-600 rounded-md p-0.5 px-2 ">
+        <select v-model="sortOption" class=" rounded-md p-0.5 px-2 ">
           <option value="title">Titel A-Ö</option>
           <option value="title-reversed">Titel A-Ö </option>
           <option value="pages">Sidor stigande</option>
@@ -38,7 +39,7 @@
         </select>
       </div>
     </div>
-    <div id="listOfBooks" class="">
+    <div id="listOfBooks" class="flex flex-warp justify-center">
 
       <li v-for="book in booksModified" :key="book.id" class="flex flex-wrap justify-center">
         <BooksCard :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />

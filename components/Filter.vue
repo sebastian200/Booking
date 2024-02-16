@@ -1,17 +1,21 @@
 
 <template>
-  <div class=" rounded-lg bg-slate-50">
+  <div class="  bg-slate-50 ">
     <form @submit.prevent="submitForm">
-      <div id="title" class="p-1 px-3 pr-4 shadow">
+      <div id="title" class="p-1 md:px-6 px-3 pr-4 shadow">
         <div class="" @click="showTitle = !showTitle">Titel ></div>
-        <input v-if="showTitle" class="w-full" type="text" placeholder="Skriv titel här" v-model="title">
+        <div class="flex justify-center">
+        <input v-if="showTitle" class="w-full md:w-3/4" type="text" placeholder="Skriv titel här" v-model="title">
       </div>
-      <div id="Author" class="p-1 px-3 pr-4 shadow">
+      </div>
+      <div id="Author" class="p-1 md:px-6 px-3 pr-4 shadow">
         <p class="" @click="showAuthor = !showAuthor">Författare ></p>
-        <input v-if="showAuthor" class="w-full" type="text" placeholder="Skriv författare här" v-model="author">
-      </div>
+        <div class="flex justify-center">
+          <input v-if="showAuthor" class="w-full md:w-3/4" type="text" placeholder="Skriv författare här" v-model="author">
+        </div>
+        </div>
    
-      <div id="genres" class="px-3 p-1 pr-4 shadow">
+      <div id="genres" class="px-3 md:px-6 p-1 pr-4 shadow ">
         <p @click="showGenres = !showGenres">Genres ></p>
         <Genres v-if="showGenres" v-model="selectedGenres" />
       </div>
@@ -34,7 +38,7 @@
         </select>
       </div>
     </div>
-      <div id="pages" class="p-1 px-3 pr-4 shadow">
+      <div id="pages" class="p-1 md:px-6 px-3 pr-4 shadow">
         <div @click="showPages = !showPages" >Sidor ></div>
         <div v-if="showPages" >
         <div class="flex">
@@ -49,7 +53,7 @@
         </div>
       </div>
       </div>
-      <div id="år" class="shadow p-1 px-3 pr-4">
+      <div id="år" class="shadow md:px-6 p-1 px-3 pr-4">
         <div @click="showYear = !showYear" >År ></div>
         <div v-if="showYear">
         <div class="flex">
@@ -65,7 +69,7 @@
       </div>
       </div>
 
-      <div id="rating" class="shadow p-1 px-3 pr-4">
+      <div id="rating" class="shadow md:px-6 p-1 px-3 pr-4">
         <p @click="showRating = !showRating">Betyg ></p>
         <div v-if="showRating" class="rating-slider flex">
           <input type="range" min="0" max="5" step="0.5" v-model="rating" />

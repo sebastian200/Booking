@@ -1,10 +1,14 @@
 <template>
     <div class="">
-        <form action="" class="px-3">
+        <form action="" class="px-3 md:px-20 lg:px-20 xl:px-96 pb-5  ">
             <div class="p-2">
-                <div></div>
-                <input type="file" @change="handleFileChange" accept="image/*" />
-                <img class="rounded-xl shadow" v-if="imageURL" :src="imageURL" alt="Selected Image" />
+                <div class="flex justify-center  ">
+                    <input class="" type="file" @change="handleFileChange" accept="image/*" />
+                </div>
+                <div class="flex justify-center">
+                    <img class="rounded-xl shadow w-2/3 md:w-1/2 xl:w-1/3" v-if="imageURL" :src="imageURL"
+                        alt="Selected Image" />
+                </div>
             </div>
             <div class="text-center">
                 <div class="text-xl font-bold">{{ title }}</div>
@@ -13,60 +17,61 @@
 
             <div>
                 <div>Titel</div>
-                <input class="w-full" type="text" placeholder="Skriv titel här" v-model="title" />
+                <div class="flex justify-center">
+                <input class="w-full md:w-2/3 " type="text" placeholder="Skriv titel här" v-model="title" />
+            </div>
                 <div>Författre</div>
-                <input class="w-full" type="name" placeholder="Skriv Författar här" v-model="author" />
+                <div class="flex justify-center">
+                <input class="w-full md:w-2/3 " type="name" placeholder="Skriv Författar här" v-model="author" />
+            </div>
             </div>
             <div>Beskrivning</div>
             <textarea class="w-full h-32 border p-1" v-model="description"></textarea>
             <div class="">
-                
+
                 <div class="flex justify-around">
                     <div class="text-center">
                         <div>Språk</div>
-                    <select v-model="language">
-                        <option value="swedish">Svenska</option>
-                        <option value="english">Engelska</option>
-                        <option value="spanish">Spanska</option>
-                        <option value="french">Franska</option>
-                        <option value="german">Tyska</option>
-                        <option value="italian">Italienska</option>
-                    </select>
-                </div>
-                <div class="text-center">
-                    <div>Typ</div>
-                    <select v-model="format">
-     
-                        <option value="pocket">Pocket</option>
-                        <option value="hardcover">Hardcover</option>
-                    </select>
-                </div>
+                        <select v-model="language">
+                            <option value="swedish">Svenska</option>
+                            <option value="english">Engelska</option>
+                            <option value="spanish">Spanska</option>
+                            <option value="french">Franska</option>
+                            <option value="german">Tyska</option>
+                            <option value="italian">Italienska</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <div>Typ</div>
+                        <select v-model="format">
+
+                            <option value="pocket">Pocket</option>
+                            <option value="hardcover">Hardcover</option>
+                        </select>
+                    </div>
                     <div class="text-center">
                         <div>År</div>
-                        <select  v-model="year">
+                        <select v-model="year">
                             <option v-for="year in years" :value="year">{{ year }}</option>
                         </select>
-                        
+
                     </div>
                 </div>
                 <div class="flex justify-between">
-                <div class="text-center">
-                    <div>Sidor</div>
-                    <input class="w-1/2" type="number" placeholder="Antal Sidor" v-model="pages" />
-                </div>
-                <div class=" text-center">
-                    <div>Kopior</div>
-                    <input class="w-1/2" type="number" placeholder="Antal Kopior" v-model="copies" />
+                    <div class="text-center">
+                        <div>Sidor</div>
+                        <input class="w-1/2" type="number" placeholder="Antal Sidor" v-model="pages" />
+                    </div>
+                    <div class=" text-center">
+                        <div>Kopior</div>
+                        <input class="w-1/2" type="number" placeholder="Antal Kopior" v-model="copies" />
+                    </div>
                 </div>
             </div>
+            <div class="pb-5">
+                <div>Genres</div>
+                <Genres class="" />
             </div>
-            <div class="flex justify-center p-2">
-            <Genres class="" />
-           
-        </div>
-
-            
-
             <div class="flex justify-center">
                 <div id="button" class="p-4" @click="addBook()">Lägg till</div>
             </div>

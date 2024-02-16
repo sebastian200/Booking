@@ -4,12 +4,12 @@
   <header  class="fixed">
     <div class="w-screen flex justify-around p-1 pr-2 pl-2 h-16 border-solid border-b-2 bg-white">
 
-        <button class="m-0 mx-5 px-1 shadow" @click="toggleDropdown()">
+        <button class="m-0  px-1 shadow" @click="toggleDropdown()">
           <img class="h-full" src="../assets/Images/2232688.png" alt="" />
         </button>
         <div class="invisible"><nuxt-link to="">Booking</nuxt-link></div>
 
-      <div @click="showDropdown = false" class="flex align-middle px-10">
+      <div @click="showDropdown = false" class="flex align-middle w-3/5 md:w-auto">
         <div class="m-3"><nuxt-link to="/">Home</nuxt-link></div>
         <div class="m-3"><nuxt-link to="/Suggestions">Suggestions</nuxt-link></div>
       </div>
@@ -17,7 +17,7 @@
   </header>
 
   <div v-if="showDropdown">
-    <DropdownMenu @disabled="toggleDropdown()" class="fixed z-20 w-screen mt-16" />
+    <DropdownMenu @disabled="toggleDropdown()" class="fixed z-20 w-screen mt-16 md:w-1/2 lg:w-1/3 xl:w-1/4" />
   </div>
 
   <main class="page border-solid border-gray-200 border-b-2">
@@ -25,20 +25,20 @@
     <slot />
   </main>
 
-  <footer class="bg-slate-100">
+  <footer class="bg-slate-200">
     <div id="supportUs" class="flex justify-around">
       <div class="flex justify-center"></div>
       <div id="swishQrCode" class="w-1/2 m-2 my-10">
         <img class="" src="../assets/Images/swish-QR-small.png" alt="" />
       </div>
       <div id="nameAndMail" class="m-auto">
-        <div class="flex justify-center my-5 bg-slate-200 rounded-lg p-0.5">
+        <div class="flex justify-center my-5 bg-slate-300 rounded-lg p-1">
           <p>Sebastian Alin</p>
         </div>
-        <div class="my-5 bg-slate-200 rounded-lg p-0.5">
+        <div class="my-5 bg-slate-300 rounded-lg p-1">
           <p>Hampus Fridhom</p>
         </div>
-        <div class="flex justify-center my-5 bg-slate-200 rounded-lg p-0.5">
+        <div class="flex justify-center my-5 bg-slate-300 rounded-lg p-1">
           <p>Elias Kroon</p>
         </div>
       </div>

@@ -4,7 +4,7 @@
 
 * {
 
-    @apply text-black;
+    @apply text-black xl:text-lg;
 }
 
 .page {
@@ -38,5 +38,8 @@ button {
 
 .border
 {
-    @apply border-solid border-gray-300 border-t-2  rounded-lg;
+    @apply border-solid border-gray-300 border-2  rounded-lg;
+}
+.newBoder {
+    @apply border-solid border-gray-300 border-2 border-t-0  ;
 }
