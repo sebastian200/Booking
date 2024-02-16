@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-        <form action="" class="px-3 md:px-20 lg:px-20 xl:px-96 pb-5  ">
+    <div class=" md:px-20 lg:px-20 xl:px-96  ">
+        <form action="" class=" bg-slate-200 px-3 pb-5">
             <div class="p-2">
                 <div class="flex justify-center  ">
                     <input class="" type="file" @change="handleFileChange" accept="image/*" />

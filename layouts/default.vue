@@ -25,36 +25,40 @@
     <slot />
   </main>
 
-  <footer class="bg-slate-200">
+  <footer class="bg-slate-50">
     <div id="supportUs" class="flex justify-around">
       <div class="flex justify-center"></div>
-      <div id="swishQrCode" class="w-1/2 m-2 my-10">
+      <div id="swishQrCode" class="w-1/3 md:w-1/4 xl:w-1/12 m-2 my-10">
         <img class="" src="../assets/Images/swish-QR-small.png" alt="" />
       </div>
-      <div id="nameAndMail" class="m-auto">
+      <div id="nameAndMail" class="my-auto w-1/2">
         <div class="flex justify-center my-5 bg-slate-300 rounded-lg p-1">
           <p>Sebastian Alin</p>
         </div>
-        <div class="my-5 bg-slate-300 rounded-lg p-1">
+        <div class="my-5 bg-slate-300 rounded-lg p-1 text-center">
           <p>Hampus Fridhom</p>
         </div>
         <div class="flex justify-center my-5 bg-slate-300 rounded-lg p-1">
           <p>Elias Kroon</p>
         </div>
+        <div class=" ">
+          <div class="flex justify-around border-solid border-gray-200 ">
+            <img class="h-9" src="../assets/Images/Facebook_Logo_(2019).png.webp" alt="" />
+            <img class="h-9" src="../assets/Images/Instagram_icon.png" alt="" />
+            <img
+              class="h-9"
+              src="../assets/Images/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.webp"
+              alt=""
+            />
+            <img class="h-9" src="../assets/Images/LinkedIn_icon.svg.png" alt="" />
+          </div>
+        </div>
       </div>
+      
     </div>
 
     <div id="conact">
-      <div class="flex justify-around p-4 border-solid border-gray-200 border-b-2">
-        <img class="h-9" src="../assets/Images/Facebook_Logo_(2019).png.webp" alt="" />
-        <img class="h-9" src="../assets/Images/Instagram_icon.png" alt="" />
-        <img
-          class="h-9"
-          src="../assets/Images/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.webp"
-          alt=""
-        />
-        <img class="h-9" src="../assets/Images/LinkedIn_icon.svg.png" alt="" />
-      </div>
+      
       <div class="border-solid p-4">
         <div id="feedback">
           <form action="" class="flex justify-center">
