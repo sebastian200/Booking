@@ -42,10 +42,10 @@
 
       <li v-for="book in booksModified" :key="book.id" class="flex flex-wrap"> 
         <BooksCard v-if="book.value.availableAmount > 0" :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
-        <div>{{book}} hello</div>
+        <!-- <div>{{book}} hello</div> -->
       </li>
     </div>
-    <div>hello</div>
+
   </div>
 </template> 
 
@@ -133,7 +133,8 @@ function getSortedBooks(sortOption, modifiedBooks) {
 
 // Input: suggestion: {id: int, value: Suggestion}
 const removeBooks = (books) => {
-  bookshelf.removeBook(books)
+  bookshelf.removeBooks(books)
+  $bookshelf.write(bookshelf.toJSON()) 
 }
 
 const returnBook = (books) => {

@@ -2,35 +2,27 @@
 <style></style>
 
 <template>
-  <div class="w-full">
-
-    <div id="BooksCard" class=" rounded-md border bg-slate-200 0 m-1 flex justify-between ">
+  <div class="w-full" @mouseover="showRemoveButton = true" @mouseleave="showRemoveButton = false">
+    <div id="BooksCard" class="rounded-md border bg-slate-200 0 m-1 flex justify-between">
       <nuxt-link to="/BookPopup">
         <div class="p-1 flex">
-
-          <img class=" h-20 rounded-md" :src="book.imageURL" alt="">
+          <img class="h-20 rounded-md" :src="book.imageURL" alt="">
           <div id="bookText" class="my-3 mx-4">
             <p id="author" class="text-center text-lg font-bold">{{book.title}}</p>
-              <p id="title" class=" text-center ">{{ book.author }}</p>
-          
+            <p id="title" class="text-center">{{ book.author }}</p>
           </div>
-
         </div>
       </nuxt-link>
-
-
-
-      <div class=" my-1">
+      <div class="my-1">
         <p class="text-center text-xl" :key="books.id">{{ books.value.availableAmount }} left</p>
         <button v-if="!isLended" @click="lend()" class="px-4 py-2">Låna bok</button>
-        <button v-if="isLended" @click="returnBook()" class=" bg-red-500 px-4 py-2"> Lämna tillbaka </button>
-
-
-
+        <button v-if="isLended" @click="returnBook()" class="bg-red-500 px-4 py-2">Lämna tillbaka</button>
+        <button v-if="showRemoveButton" @click="removeBooks()" class="bg-red-500 px-4 py-2">Ta bort</button>
       </div>
     </div>
-
   </div>
+
+   
 </template>
 
 
@@ -49,6 +41,7 @@ const emit = defineEmits([
   "returnBook",
   "lend"
 ])
+const showRemoveButton = ref(false)
 const exists = ref(true)
 var isLended = ref(false)
 
