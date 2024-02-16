@@ -200,6 +200,9 @@ filterBooks(formData = {
   if (type !== '') {
     filteredBooks = filteredBooks.filter(books => books.value.book.type === type);
   }
+  if (format !== '') {
+    filteredBooks = filteredBooks.filter(books => books.value.book.format === format);
+  }
   if (minPages !== 0) {
     filteredBooks = filteredBooks.filter(books => books.value.book.pages >= minPages);
   }

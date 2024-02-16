@@ -23,7 +23,7 @@ select {
     @apply bg-slate-200 p-1 rounded-lg m-1 border-gray-300 bg-slate-200 border-2;
 }
 .shadow {
-    @apply border-solid border-gray-200 border-b;
+    @apply border-solid border-gray-300 border-b;
 }
 
 button {

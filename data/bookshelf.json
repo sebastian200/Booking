@@ -1,1 +1,42 @@
-{"books":[{"id":0,"value":{"book":{"title":"tderdfes","author":"esrs","format":"","year":[1901],"genres":[],"language":"svenska","rating":"2","pages":7,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg","description":"77"},"totalAmount":6,"availableAmount":7}},{"id":1,"value":{"book":{"title":"tderdfes","author":"esrs","format":"","year":[1901],"genres":[],"language":"svenska","rating":"2","pages":7,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg","description":"77"},"totalAmount":6,"availableAmount":6}}]}
+{
+  "books": [
+    {
+      "id": 0,
+      "value": {
+        "book": {
+          "title": "tderdfes",
+          "author": "esrs",
+          "format": "",
+          "year": [1901],
+          "genres": [],
+          "language": "svenska",
+          "rating": "2",
+          "pages": 7,
+          "imageURL": "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg",
+          "description": "77"
+        },
+        "totalAmount": 6,
+        "availableAmount": 7
+      }
+    },
+    {
+      "id": 1,
+      "value": {
+        "book": {
+          "title": "tderdfes",
+          "author": "esrs",
+          "format": "",
+          "year": [1901],
+          "genres": [],
+          "language": "svenska",
+          "rating": "2",
+          "pages": 7,
+          "imageURL": "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg",
+          "description": "77"
+        },
+        "totalAmount": 6,
+        "availableAmount": 6
+      }
+    }
+  ]
+}
