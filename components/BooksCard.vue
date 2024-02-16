@@ -2,8 +2,9 @@
 <style></style>
 
 <template>
-  <div :class="soldOut.value">
-  <div class="w-full" @mouseover="showRemoveButton = true" @mouseleave="showRemoveButton = false">
+
+  <div  >
+  <div v-if="books.value.availableAmount > 0" class="w-full" @mouseover="showRemoveButton = true" @mouseleave="showRemoveButton = false">
     <div id="BooksCard" class="rounded-md border bg-slate-200 0 m-1 flex justify-between">
       <nuxt-link to="/BookPopup">
         <div class="p-1 flex">
@@ -21,7 +22,27 @@
         <button v-if="showRemoveButton" @click="removeBooks()" class="bg-red-500 px-4 py-2">Ta bort</button>
       </div>
     </div>
+
   </div>
+  <div v-if="books.value.availableAmount <= 0">
+    <div id="BooksCard" class="rounded-md border bg-red-400 0 m-1 flex justify-between">
+      <nuxt-link to="/BookPopup">
+        <div class="p-1 flex">
+          <img class="h-20 rounded-md" :src="book.imageURL" alt="">
+          <div id="bookText" class="my-3 mx-4">
+            <p id="author" class="text-center text-lg font-bold">{{book.title}}</p>
+            <p id="title" class="text-center">{{ book.author }}</p>
+          </div>
+        </div>
+      </nuxt-link>
+      <div class="">
+        <p class="text-lg font-bold my-6 mx-4" > Slutsåld</p>
+      </div>
+    </div>
+
+
+  </div>
+  
 </div>
 
    
@@ -44,17 +65,14 @@ const emit = defineEmits([
   "lend"
 ])
 const showRemoveButton = ref(false)
-const soldOut = ref(t)
+
 var isLended = ref(false)
 
 
-const availableAmount = ref(books.value.availableAmount)
+
 const book = books.value.book
 
 
-if (books.value.availableAmount == 0) {
-  soldOut.value = 
-}
 
 const returnBook = () => {
   emit("returnBook", books)
@@ -63,7 +81,8 @@ const returnBook = () => {
 
 const lend = () => {
   emit("lend", books)
-  isLended = true
+  //isLended = true
+  console.log(books.value.availableAmount)
 
 }
 

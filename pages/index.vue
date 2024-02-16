@@ -41,7 +41,7 @@
     <div id="listOfBooks" class="">
 
       <li v-for="book in booksModified" :key="book.id" class="flex flex-wrap"> 
-        <BooksCard v-if="book.value.availableAmount > 0" :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
+        <BooksCard :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
         <!-- <div>{{book}} hello</div> -->
       </li>
     </div>

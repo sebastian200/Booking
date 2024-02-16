@@ -1,1 +1,42 @@
-{"books":[{"id":0,"value":{"book":{"title":"","author":"","format":"","year":0,"genres":[],"language":"svenska","rating":0,"pages":0,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg"},"totalAmount":0,"availableAmount":0}},{"id":1,"value":{"book":{"title":"hej","author":"","format":"","year":0,"genres":[],"language":"svenska","rating":0,"pages":0,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg"},"totalAmount":0,"availableAmount":0}},{"id":2,"value":{"book":{"title":"hej","author":"och","format":"","year":0,"genres":[],"language":"svenska","rating":0,"pages":0,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg","description":""},"totalAmount":0,"availableAmount":0}},{"id":3,"value":{"book":{"title":"hej","author":"och","format":"","year":0,"genres":[],"language":"svenska","rating":0,"pages":0,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg","description":""},"totalAmount":0,"availableAmount":0}},{"id":4,"value":{"book":{"title":"ugyft","author":"ytfrd","format":"","year":[1902],"genres":[],"language":"svenska","rating":"2.5","pages":7,"imageURL":"https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg","description":"uhygfdxgyf"},"totalAmount":3,"availableAmount":3}}]}
+{
+  "books": [
+    {
+      "id": 0,
+      "value": {
+        "book": {
+          "title": "tderdfes",
+          "author": "esrs",
+          "format": "",
+          "year": [1901],
+          "genres": [],
+          "language": "svenska",
+          "rating": "2",
+          "pages": 7,
+          "imageURL": "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg",
+          "description": "77"
+        },
+        "totalAmount": 6,
+        "availableAmount": 7
+      }
+    },
+    {
+      "id": 1,
+      "value": {
+        "book": {
+          "title": "tderdfes",
+          "author": "esrs",
+          "format": "",
+          "year": [1901],
+          "genres": [],
+          "language": "svenska",
+          "rating": "2",
+          "pages": 7,
+          "imageURL": "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg",
+          "description": "77"
+        },
+        "totalAmount": 6,
+        "availableAmount": 6
+      }
+    }
+  ]
+}
