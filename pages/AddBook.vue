@@ -15,6 +15,7 @@
                
                 <select multiple v-model="year"> <option v-for="year in years" :value="year">{{ year }}</option> </select>
                 <input type="number" placeholder="Kopior" v-model="copies">
+                
             </div>
             <div class="flex justify-around">
                 <select v-model="language">
@@ -28,6 +29,7 @@
                   </select>
                 <input class="w-1/3" type="number" placeholder="Sidor" v-model="pages">
             </div>
+            <input type="text" placeholder="Kort beskrivning" v-model="description">
             </div>
 
             <Genres class="" />
@@ -78,6 +80,7 @@ const genres = ref([]);
 const language = ref('svenska');
 const format = ref('');
 const rating = ref(0);
+const description = ref('');
 
 const imageURL = ref('https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg');
 const bookType = ref('');
@@ -105,6 +108,7 @@ function addBook() {
         language: language.value,
         imageURL: imageURL.value,
         rating: rating.value,
+        description: description.value
 
 })
     
