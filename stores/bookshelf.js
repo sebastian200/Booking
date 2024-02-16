@@ -3,6 +3,7 @@ import { defineStore } from "pinia"
 import Book from "../classes/Book.js"
 import Books from "../classes/Books.js"
 
+
 const booksCompare = (first, second) => {
   /*
   let firstJson = first.toJSON()
@@ -19,7 +20,12 @@ export const useBookshelfStore = defineStore("bookshelf", {
   }),
   getters: {
     getBooks() {
-      return this.books.map(book => Book.fromJSON(book)) // convert to Book class object from json
+      return this.books.map(object => {
+        return {
+          ...object,
+          value: Suggestion.fromJSON(object.value)
+        }
+      })
     },
     getSortedBooks(sortOption = title) {
       const books = this.books
@@ -33,18 +39,21 @@ export const useBookshelfStore = defineStore("bookshelf", {
         default:
           return books
       }
-    }
+    },
 
   },
 
 
   actions: {
 
+
+
     getBook(index) {
       let books = this.books[index]
       books.value = Books.fromJSON(books.value)
 
       return books
+      
     },
     
     getNewId() {
@@ -59,11 +68,13 @@ export const useBookshelfStore = defineStore("bookshelf", {
 
     addBooks(books) {
       // For some reason, books can only contain POJOs
-    
+      const { $bookshelf } = useNuxtApp()
       this.books.push({
         id: this.getNewId(),
         value: books.toJSON()
       })
+      $bookshelf.write(this.toJSON()) 
+      console.log(this.books)
    
     },
 
@@ -84,13 +95,14 @@ export const useBookshelfStore = defineStore("bookshelf", {
        
         if(booksCompare(current, books)) {
           current.value.returnBook()
-          console.log("hello")
+
           this.books[index] = {
             id: current.id,
             value: current.value.toJSON()
           }
         }
       }
+
     },
     lendBook(books) {
       for(let index in this.books) {
@@ -104,6 +116,7 @@ export const useBookshelfStore = defineStore("bookshelf", {
           }
         }
       }
+
       
     },
 
@@ -174,7 +187,7 @@ filterBooks(formData = {
     return [];
   }
   let filteredBooks = data.value.slice();
-  console.log(formData)
+
 
   if (title !== '') {
 

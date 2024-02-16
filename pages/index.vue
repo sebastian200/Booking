@@ -1,4 +1,5 @@
 
+
 <style>
 .filter {
   transition: height 0.3s ease-in-out;
@@ -49,7 +50,7 @@
 </template> 
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import Book from "../classes/Book.js"
 import Books from "../classes/Books.js"
 
@@ -60,7 +61,26 @@ const showFilter = ref(false)
 const sortOption = ref('title')
 const title = ref('')
 let newFormData = {title: '', author: '', type: '', minPages: 0, maxPages: Infinity, genres: [], language: '', minYear: 1900, maxYear: 2023, rating: 0}
-var books = ref(bookshelf.books.slice())
+let books = ref(bookshelf.books)
+
+
+
+$bookshelf.read()
+.then(json => {
+
+
+  bookshelf.fromJSON(json)
+
+  books.value = bookshelf.books
+
+})
+.catch(error => {
+  console.log(error)
+})
+
+watch(bookshelf.books, () => {
+  $bookshelf.write(bookshelf.toJSON()) 
+})
 
 
 
@@ -118,22 +138,15 @@ const removeBooks = (books) => {
 
 const returnBook = (books) => {
   bookshelf.returnBook(books)
-  console.log("hllo")
+  $bookshelf.write(bookshelf.toJSON()) 
 }
 
 const lendBook = (books) => {
-  bookshelf.lendBook(books)  
+  bookshelf.lendBook(books)
+  $bookshelf.write(bookshelf.toJSON()) 
 }
 
-$bookshelf.read()
-.then(json => {
-  bookshelf.fromJSON(json)
-})
-.catch(error => {
-  console.log(error)
-})
 
-$bookshelf.write(bookshelf.toJSON())
 
 
 

@@ -14,7 +14,7 @@ export default class Books {
   getTotalAmount() {
     return this.totalAmount
   }
-
+ getAvailableAmount
   getAvailableAmount() {
     return this.availableAmount
   }

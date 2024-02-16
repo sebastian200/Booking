@@ -21,7 +21,7 @@
 
 
       <div class=" my-1">
-        <p class="text-center text-xl">{{ books.value.availableAmount }} left</p>
+        <p class="text-center text-xl" :key="books.id">{{ books.value.availableAmount }} left</p>
         <button v-if="!isLended" @click="lend()" class="px-4 py-2">Låna bok</button>
         <button v-if="isLended" @click="returnBook()" class=" bg-red-500 px-4 py-2"> Lämna tillbaka </button>
 
@@ -43,7 +43,7 @@ const bookshelf = useBookshelfStore()
 
 
 
-const props = defineProps(["books"])
+const { books } = defineProps(["books"])
 const emit = defineEmits([
   "remove",
   "returnBook",
@@ -52,7 +52,8 @@ const emit = defineEmits([
 const exists = ref(true)
 var isLended = ref(false)
 
-const books = props.books
+
+const availableAmount = ref(books.value.availableAmount)
 const book = books.value.book
 
 
