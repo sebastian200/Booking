@@ -2,6 +2,7 @@
 <style></style>
 
 <template>
+  <div :class="soldOut.value">
   <div class="w-full" @mouseover="showRemoveButton = true" @mouseleave="showRemoveButton = false">
     <div id="BooksCard" class="rounded-md border bg-slate-200 0 m-1 flex justify-between">
       <nuxt-link to="/BookPopup">
@@ -21,6 +22,7 @@
       </div>
     </div>
   </div>
+</div>
 
    
 </template>
@@ -42,13 +44,17 @@ const emit = defineEmits([
   "lend"
 ])
 const showRemoveButton = ref(false)
-const exists = ref(true)
+const soldOut = ref(t)
 var isLended = ref(false)
 
 
 const availableAmount = ref(books.value.availableAmount)
 const book = books.value.book
 
+
+if (books.value.availableAmount == 0) {
+  soldOut.value = 
+}
 
 const returnBook = () => {
   emit("returnBook", books)

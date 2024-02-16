@@ -24,7 +24,7 @@
       </div>
       
     </div>
-    <div class="h-20"></div>
+    <div class="h-20 z-10"></div>
     <div class="flex justify-between w-screen">
       <div class=" text-sm text-center m-1 text ">{{ booksModified.length }}+ resultat</div>
       <div class="  mx-5">
