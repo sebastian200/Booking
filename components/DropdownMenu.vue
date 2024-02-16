@@ -16,7 +16,7 @@
             
             
             
-        </div>
+        </div>   
         <div class="shadow p-4 flex justify-center">
             <nuxt-link class="text-center" to="">Inställningar</nuxt-link>
         </div>
@@ -25,10 +25,10 @@
         </div>
         <div class="flex justify-around p-4">
             <div>
-                <button><nuxt-link to="">Logga in</nuxt-link></button>
+                <button @click="$emit('disabled')" ><nuxt-link to="">Logga in</nuxt-link></button>
             </div>
             <div>
-                <button><nuxt-link to="">Registrera dig</nuxt-link></button>
+                <button @click="$emit('disabled')"><nuxt-link to="">Registrera dig</nuxt-link></button>
             </div>
         </div>
     </div>
@@ -38,6 +38,8 @@
 <script setup>
 var lendedBooks =[]
 
-
+const emit = defineEmits([
+'disabled',
+])
 </script>
 

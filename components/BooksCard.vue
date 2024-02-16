@@ -36,6 +36,7 @@
         </div>
       </nuxt-link>
       <div class="">
+        <button v-if="isLended" @click="returnBook()" class="bg-red-500 px-4 py-2">Lämna tillbaka</button>
         <p class="text-lg font-bold my-6 mx-4" > Slutsåld</p>
       </div>
     </div>
@@ -81,7 +82,7 @@ const returnBook = () => {
 
 const lend = () => {
   emit("lend", books)
-  //isLended = true
+  isLended = true
   console.log(books.value.availableAmount)
 
 }
