@@ -35,10 +35,12 @@
           </div>
         </div>
       </nuxt-link>
-      <div class="">
-        <button v-if="isLended" @click="returnBook()" class="bg-red-500 px-4 py-2">Lämna tillbaka</button>
-        <button v-if="showRemoveButton" @click="removeBooks()" class="bg-red-500 px-4 py-2">Ta bort</button>
-        <p class="text-lg font-bold my-6 mx-4" > Slutsåld</p>
+      <div class="my-1 px-5">
+        <p class="text-lg font-bold  text-center " > Slutsåld</p>
+        <div class="flex"> <button v-if="isLended" @click="returnBook()" class="bg-red-500 px-4 py-2">Lämna tillbaka</button>
+          <button v-if="showRemoveButton" @click="removeBooks()" class="bg-red-500 px-4 py-2">Ta bort</button>
+  </div>
+       
       </div>
     </div>
 

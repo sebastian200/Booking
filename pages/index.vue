@@ -11,7 +11,7 @@
 </style>
 
 <template>
-  <div>
+  <div class=" md:px-10 lg:px-28 xl:px-40">
     <div id="bookSorting" class="fixed   w-full ">
       <div class="bg-slate-50 ">
         <div class=" flex justify-around pb-4 p-1 w-full ">
@@ -26,7 +26,7 @@
 
     </div>
     <div class="h-20 z-10"></div>
-    <div class="flex justify-between w-screen">
+    <div class="flex justify-between ">
       <div class=" text-sm text-center m-1 text ">{{ booksModified.length }}+ resultat</div>
       <div class="  mx-5">
         <select v-model="sortOption" class=" rounded-md p-0.5 px-2 ">
@@ -39,12 +39,12 @@
         </select>
       </div>
     </div>
-    <div id="listOfBooks" class="flex flex-warp justify-center">
+    <div id="listOfBooks" class=" flex flex-wrap">
 
-      <li v-for="book in booksModified" :key="book.id" class="flex flex-wrap justify-center">
-        <BooksCard :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
+      <div class="w-full lg:w-1/2 xl:w-1/3" v-for="book in booksModified" :key="book.id" >
+        <BooksCard  :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
         <!-- <div>{{book}} hello</div> -->
-      </li>
+      </div>
     </div>
 
   </div>
