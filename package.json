@@ -17,10 +17,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-
     "@pinia/nuxt": "^0.5.1",
-    "firebase": "^10.7.1",
-
+    "firebase": "^10.6.0",
     "pinia": "^2.1.7"
   }
 }

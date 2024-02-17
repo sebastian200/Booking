@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin((nuxtApp) => { // This is the plugin that will be used to initialize the Firebase app and provide the auth object to the app
   /* const config = useRuntimeConfig(); */ // This is not working, so I have to use the public config
 
   const firebaseConfig = {
@@ -23,23 +23,24 @@ export default defineNuxtPlugin((nuxtApp) => {
   const firestore = getFirestore(app);
 
   // Initialize Firebase with local emulator
-  /*nuxtApp.provide("firestore", firestore); */
+
 
   const auth = getAuth(app); // This is the auth object that can be used to sign in and sign up users
 
 
 
   function signUp(email = "", password = "", FirstName = "", LastName = "") {
+    console.log("signUp function")
     createUserWithEmailAndPassword(auth, email, password)
     .then(function() {
       let user = auth.currentUser;
-      /*let database_user = firestore.collection("users/" + user.uid).doc(user.uid); */
+      let database_user = firestore.collection("users/" + user.uid).doc(user.uid);
       let data = {
         email: email,
         FirstName: FirstName,
         LastName: LastName
       };
-      /* database_user.set(data) */
+      database_user.set(data)
       })
       
   
