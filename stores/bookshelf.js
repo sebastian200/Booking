@@ -79,12 +79,17 @@ export const useBookshelfStore = defineStore("bookshelf", {
     },
 
     removeBooks(books) {
-      this.books.forEach((current, index) => {
-        // Maybe add booksCompare
-        if(current.id == books.id) {
-          this.books.splice(index, 1)
+        if (confirm('Är du säker på att du vill ta bort boken?')) {
+   
+               // Remove the book
+        this.books.forEach((current, index) => {
+          // Maybe add booksCompare
+          if(current.id == books.id) {
+            this.books.splice(index, 1)
+          }
+        })
         }
-      })
+      
     },
 
     returnBook(books) {
