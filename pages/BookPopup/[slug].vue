@@ -5,7 +5,7 @@ li {
 </style>
 
 <template>
-    <div :style="{ background: availableAmount <= 0 ? 'rgba(255, 0, 0, 0.5)' : '' }">
+    <div :style="{ background: availableAmount <= 0 ? 'rgba(255, 0, 0, 0.5)' : '' }" class="md:mx-24 lg:mx-48 xl:mx-96">
         <div>
             <div class="flex justify-between p-1 pt-2">
                 <p class="px-1">{{author}}</p>
@@ -13,15 +13,15 @@ li {
             </div>
             <div class="pb-1">
                 <p v-if="availableAmount <= 0 && !isLended" class=" text-center text-3xl font-bold">Slutsålt</p>
-                <p v-if="isLended" class=" text-center text-2xl font-bold">{{title}}</p>
+                <p  class=" text-center text-2xl font-bold">{{title}}</p>
                 
             </div>
 
         </div>
 
         <div id="bookImg" class="flex justify-center">
-            <img class="w-2/3 rounded-lg shadow-md shadow-black border"
-                src="/assets/Images/booksImmages/nedladdning (1).jpg" alt="">
+            <img class="w-2/3 rounded-lg shadow-md shadow-black "
+                :src="imageURL" alt="">
         </div>
         <div class="flex justify-between p-2 shadow">
             <div id="avalability" class="m-2 text-lg font-bold" :key="id">
@@ -99,6 +99,7 @@ const language = ref("svenska")
 const format = ref("")
 const rating = ref(0)
 const description = ref("Skriv Beskrvning här")
+const imageURL = ref("https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg")
 
 const totalAmount = ref(0)
 const availableAmount = ref(0)
@@ -135,6 +136,7 @@ $bookshelf.read()
     format.value = thisBook.value.value.book.format
     rating.value = thisBook.value.value.book.rating
     description.value = thisBook.value.value.book.description
+    imageURL.value = thisBook.value.value.book.imageURL
 
     id.value = thisBook.value.value.id
 
@@ -145,6 +147,7 @@ $bookshelf.read()
   })
   .catch(error => {
     console.log(error)
+    console.log(        console.log(thisBook))
   })
 
 function lendBook() {
