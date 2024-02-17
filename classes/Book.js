@@ -46,7 +46,7 @@ export default class Book {
     this.pages = pages
     this.imageURL = imageURL
     this.description = description
-    this.image = image
+
 
     this.hash = createHash(this.title, this.author)
   }
