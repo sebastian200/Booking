@@ -15,15 +15,14 @@ export default class Suggestion {
       $books.read()
       .then(json => {
         books.fromJSON(json)
+
+        books.addBook(book)
+
+        $books.write(books.toJSON())
       })
       .catch(error => {
         console.log(error)
       })
-
-      books.addBook(book)
-
-      // Write the updated books
-      $books.write(books.toJSON())
     }
   }
 
