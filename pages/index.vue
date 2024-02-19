@@ -11,7 +11,7 @@
 </style>
 
 <template>
-  <div class=" md:px-10 lg:px-28 2xl:px-40">
+  <div class=" md:px-10 lg:px-28 ">
     <div id="bookSorting" class="fixed   w-full ">
       <div class="bg-slate-50 ">
         <div class=" flex justify-around pb-4 p-1 w-full ">
