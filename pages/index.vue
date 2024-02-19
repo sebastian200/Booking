@@ -1,5 +1,3 @@
-
-
 <style>
 .filter {
   transition: height 0.3s ease-in-out;
@@ -11,6 +9,8 @@
 </style>
 
 <template>
+  <NuxtLink to="new?type=bookshelf" class="bg-red-400">New</NuxtLink>
+
   <div class=" md:px-10 lg:px-28 xl:px-40">
     <div id="bookSorting" class="fixed   w-full ">
       <div class="bg-slate-50 ">
@@ -41,9 +41,8 @@
     </div>
     <div id="listOfBooks" class=" flex flex-wrap">
 
-      <div class="w-full lg:w-1/2 xl:w-1/3" v-for="book in booksModified" :key="book.id" >
-        <BooksCard  :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
-        <!-- <div>{{book}} hello</div> -->
+      <div class="w-full lg:w-1/2 xl:w-1/3" v-for="books in booksModified" :key="books.hash" >
+        <BooksCard :books=books @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
       </div>
     </div>
 
@@ -148,9 +147,4 @@ const lendBook = (books) => {
   bookshelf.lendBook(books)
   $bookshelf.write(bookshelf.toJSON())
 }
-
-
-
-
-
 </script>

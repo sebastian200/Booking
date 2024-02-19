@@ -35,7 +35,7 @@ const createHash = (title, author) => {
 }
 
 export default class Book {
-  constructor({ title, author, format, year, genres, language, rating, pages, imageURL, description }) {
+  constructor({ title, author, format, year, genres, language, rating, pages, image, description }) {
     this.title = title
     this.author = author
     this.format = format
@@ -44,7 +44,7 @@ export default class Book {
     this.language = language
     this.rating = rating
     this.pages = pages
-    this.imageURL = imageURL
+    this.image = image
     this.description = description
 
 

@@ -20,7 +20,7 @@ li {
         </div>
 
         <div id="bookImg" class="flex justify-center">
-            <img class="w-2/3 rounded-lg shadow-md shadow-black " :src="imageURL" alt="">
+            <img class="w-2/3 rounded-lg shadow-md shadow-black " :src="image" alt="">
         </div>
         <div class="flex justify-between p-2 shadow">
             <div id="avalability" class="m-2 text-lg font-bold" :key="id">
@@ -99,7 +99,7 @@ const language = ref("svenska")
 const format = ref("")
 const rating = ref(0)
 const description = ref("Skriv Beskrvning här")
-const imageURL = ref("https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg")
+const image = ref("https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg")
 
 const totalAmount = ref(0)
 const availableAmount = ref(0)
@@ -135,7 +135,7 @@ $bookshelf.read()
                 format.value = thisBook.value.value.book.format
                 rating.value = thisBook.value.value.book.rating
                 description.value = thisBook.value.value.book.description
-                imageURL.value = thisBook.value.value.book.imageURL
+                image.value = thisBook.value.value.book.image
 
                 id.value = thisBook.value.value.id
 

@@ -6,7 +6,7 @@
                     <input class="" type="file" @change="handleFileChange" accept="image/*" />
                 </div>
                 <div class="flex justify-center">
-                    <img class="rounded-xl shadow w-2/3 md:w-1/2 xl:w-1/3" v-if="imageURL" :src="imageURL"
+                    <img class="rounded-xl shadow w-2/3 md:w-1/2 xl:w-1/3" v-if="image" :src="image"
                         alt="Selected Image" />
                 </div>
             </div>
@@ -101,7 +101,7 @@ const format = ref("");
 const rating = ref(0);
 const description = ref("Skriv Beskrvning här");
 
-const imageURL = ref(
+const image = ref(
     "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg"
 );
 const bookType = ref("");
@@ -126,7 +126,7 @@ function addBook() {
         genres: genres.value,
         format: bookType.value,
         language: language.value,
-        imageURL: imageURL.value,
+        image: image.value,
         rating: rating.value,
         description: description.value,
     });

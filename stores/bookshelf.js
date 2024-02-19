@@ -1,34 +1,29 @@
 import { defineStore } from "pinia"
 
-import Book from "../classes/Book.js"
+import { useBooksStore } from "~/stores/books.js"
+
 import Books from "../classes/Books.js"
-
-
-const booksCompare = (first, second) => {
-  /*
-  let firstJson = first.toJSON()
-  let secondJson = second.toJSON()
-
-  return JSON.stringify(firstJson) === JSON.stringify(secondJson)
-  */
-  return first.id === second.id
-}
 
 export const useBookshelfStore = defineStore("bookshelf", {
   state: () => ({
-    books: [], //add id later
+    // For some reason, books can only contain POJOs
+    books: []
   }),
   getters: {
+    /*
+     *
+     */
     getBooks() {
-      return this.books.map(object => {
-        return {
-          ...object,
-          value: Suggestion.fromJSON(object.value)
-        }
+      return this.books.map(books => {
+        return Books.fromJSON(books)
       })
     },
+    /*
+     *
+     */
     getSortedBooks(sortOption = title) {
       const books = this.books
+
       switch (sortOption.value) {
         case 'title':
           return books.sort((a, b) => a.book.title.localeCompare(b.book.title))
@@ -40,190 +35,241 @@ export const useBookshelfStore = defineStore("bookshelf", {
           return books
       }
     },
-
   },
-
-
   actions: {
-
-
-
-    getBook(index) {
-      let books = this.books[index]
-      books.value = Books.fromJSON(books.value)
-
-      return books
-      
-    },
-    
-    getNewId() {
-      let id = 0
-      for(let books of this.books.sort((a, b) => a.id - b.id)) {
-        if(id < books.id) break
-        else id++
+    /*
+     * Returns
+     * - Books | the books at the index 
+     * - null       | the index was out of bounds
+     */
+    getBooks(index) {
+      if(index < 0 || index > this.books.length) {
+        return null
       }
-
-      return id
+      return Books.fromJSON(this.books[index])
     },
+    /*
+     * Returns
+     * - index | the index of the books with the hash
+     * - (-1)  | no books has the inputted hash
+     */
+    getHashBooksIndex(hash) {
+      for(let index in this.books) {
+        let books = this.getBooks(index)
 
+        let booksHash = books?.getBook()?.getHash()
+
+        if(booksHash === hash) return index
+      }
+      return -1
+    },
+    /*
+     * Params:
+     * - books | the books to add
+     *
+     * Returns:
+     * - true  | the books was successfully added
+     * - false | something went wrong
+     */
     addBooks(books) {
-      // For some reason, books can only contain POJOs
-      const { $bookshelf } = useNuxtApp()
-      this.books.push({
-        id: this.getNewId(),
-        value: books.toJSON()
+      let hash = books?.getBook()?.getHash()
+
+      if(hash == null) {
+        console.log("Trying to add books with hash null")
+        return false
+      }
+
+      for(let current of this.getBooks) {
+        if(current?.getBook()?.getHash() === hash) {
+          return false
+        }
+      }
+      this.books.push(books.toJSON())
+
+      return true
+    },
+    /*
+     * Params:
+     * - hash | the book hash for the effected books
+     */
+    removeBooks(hash) {
+      let index = this.getHashBooksIndex(hash)
+
+      if(index === -1) return false
+
+      this.books.splice(index, 1)
+
+      // Remove the book all toghether
+      const books = useBooksStore()
+      const { $books } = useNuxtApp()
+
+      // Read the current books
+      $books.read()
+      .then(json => {
+        books.fromJSON(json)
       })
-      $bookshelf.write(this.toJSON()) 
-      console.log(this.books)
-   
+      .catch(error => {
+        console.log(error)
+      })
+
+      books.removeBook(hash)
+
+      // Write the updated books
+      $books.write(books.toJSON())
+
+      return true
     },
 
-    removeBooks(books) {
-        if (confirm('Är du säker på att du vill ta bort boken?')) {
-   
-               // Remove the book
-        this.books.forEach((current, index) => {
-          // Maybe add booksCompare
-          if(current.id == books.id) {
-            this.books.splice(index, 1)
-          }
-        })
-        }
-      
+    /*
+     * Params:
+     * - hash | the book hash for the effected books
+     *
+     * Returns
+     * - true  | the books was successfully downvoted
+     * - false | something went wrong
+     */
+    returnBooks(hash) {
+      let index = this.getHashBooksIndex(hash)
+
+      let books = this.getBooks(index)
+
+      if(books == null) return false
+
+      books.returnBook()
+
+      this.books[index] = books.toJSON()
+
+      return true
     },
+    /*
+     * Params:
+     * - hash | the book hash for the effected books
+     *
+     * Returns
+     * - true  | the books was successfully upvoted
+     * - false | something went wrong
+     */
+    lendBooks(hash) {
+      let index = this.getHashBooksIndex(hash)
 
-    returnBook(books) {
-      for(let index in this.books) {
-       
-        
-        let current = this.getBook(index)
-       
-        if(booksCompare(current, books)) {
-          current.value.returnBook()
+      let books = this.getBooks(index)
 
-          this.books[index] = {
-            id: current.id,
-            value: current.value.toJSON()
-          }
-        }
-      }
+      if(books == null) return false
 
+      books.lend()
+
+      this.books[index] = books.toJSON()
+
+      return true
     },
-    lendBook(books) {
-      for(let index in this.books) {
-        let current = this.getBook(index)
-    
-        if(booksCompare(current, books)) {
-          current.value.lend()
-          this.books[index] = {
-            id: current.id,
-            value: current.value.toJSON()
-          }
-        }
-      }
-
-      
-    },
-
-    toJSON() { // convert to json
-      return {
-        books: this.books.map(book => book) 
-      }
-    },
-    fromJSON(json) { // convert from json
-      try {
-
-        this.books = json.books
-      }
-      catch (error) {
-        console.log("Could not deserialize json to books")
-        // console.log(error)
-      }
-    },
-
-    // If no filter is used, this equals getBooks
-
+    /*
+     *
+     */
     setListOfBooks(newListOfBooks) {
       this.listOfBooks = newListOfBooks;
     },
-
+    /*
+     *
+     */
     loadListOfBooks() {
       const { $bookshelf } = useNuxtApp()
       $bookshelf.read().then(Response => {
         this.fromJSON(Response);
       });
     },
-
+    /*
+     *
+     */
     saveListOfBooks() {
       const { $bookshelf } = useNuxtApp()
       $bookshelf.write(this.toJSON()).then (Response => console.log(Response));
-      
+
     },
+    /*
+     *
+     */
+    search(title) {
+      let filteredBooks = this.books.slice();
+      if (title !== '') {
 
-search(title) {
-  let filteredBooks = this.books.slice();
-  if (title !== '') {
+        filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
 
-    filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
+      }
+      return filteredBooks;
+    },
+    /*
+     *
+     */
+    filterBooks(formData = {
+      title: '',
+      author: '',
+      type: '',
+      minPages: 0,
+      maxPages: Infinity,
+      genres: []
+    }, books) {
 
+      let title = formData.title
+      let author = formData.author
+      let type = formData.type
+      let minPages = formData.minPages
+      let maxPages = formData.maxPages
+      let genres = formData.genres
+      let format = formData.format
+      let data = books;
+      if (data === undefined || data.value.length === 0) {
+        console.log('undefined')
+        return [];
+      }
+      let filteredBooks = data.value.slice();
+
+
+      if (title !== '') {
+
+        filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
+
+      }
+      if (author !== '') {
+        filteredBooks = filteredBooks.filter(books => books.value.book.author.includes(author));
+      }
+      if (type !== '') {
+        filteredBooks = filteredBooks.filter(books => books.value.book.type === type);
+      }
+      if (format !== '') {
+        filteredBooks = filteredBooks.filter(books => books.value.book.format === format);
+      }
+      if (minPages !== 0) {
+        filteredBooks = filteredBooks.filter(books => books.value.book.pages >= minPages);
+      }
+      if (maxPages !== Infinity) {
+        filteredBooks = filteredBooks.filter(books => books.value.book.pages <= maxPages);
+      }
+
+      if (genres.length > 0) {
+        filteredBooks = filteredBooks.filter(books => books.value.book.genres.some(genre => genres.includes(genre)));
+      }
+
+      return filteredBooks;
+    },
+    /*
+     * 
+     */
+    toJSON() {
+      return {
+        bookss: this.bookss
+      }
+    },
+    /*
+     * Params
+     * - json | the json object to deserialize
+     */
+    fromJSON(json) {
+      try {
+        this.bookss = json.bookss ?? []
+      }
+      catch(error) {
+        console.log(error)
+      }
+    },
   }
-  return filteredBooks;
-},
-
-filterBooks(formData = {
-  title: '',
-  author: '',
-  type: '',
-  minPages: 0,
-  maxPages: Infinity,
-  genres: []
-
-}, books) {
-
-  let title = formData.title
-  let author = formData.author
-  let type = formData.type
-  let minPages = formData.minPages
-  let maxPages = formData.maxPages
-  let genres = formData.genres
-  let format = formData.format
-  let data = books;
-  if (data === undefined || data.value.length === 0) {
-    console.log('undefined')
-    return [];
-  }
-  let filteredBooks = data.value.slice();
-
-
-  if (title !== '') {
-
-    filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
-
-  }
-  if (author !== '') {
-    filteredBooks = filteredBooks.filter(books => books.value.book.author.includes(author));
-  }
-  if (type !== '') {
-    filteredBooks = filteredBooks.filter(books => books.value.book.type === type);
-  }
-  if (format !== '') {
-    filteredBooks = filteredBooks.filter(books => books.value.book.format === format);
-  }
-  if (minPages !== 0) {
-    filteredBooks = filteredBooks.filter(books => books.value.book.pages >= minPages);
-  }
-  if (maxPages !== Infinity) {
-    filteredBooks = filteredBooks.filter(books => books.value.book.pages <= maxPages);
-  }
-
-  if (genres.length > 0) {
-    filteredBooks = filteredBooks.filter(books => books.value.book.genres.some(genre => genres.includes(genre)));
-  }
-
-  return filteredBooks;
-}
-
-    
-  },
-
 })

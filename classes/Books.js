@@ -1,27 +1,54 @@
 import Book from "./Book.js"
 
+import { useBooksStore } from "~/stores/books.js"
+
 export default class Books {
-  constructor({ book, amount }) {
-    this.book = book
-    this.totalAmount = amount
-    this.availableAmount = amount
+  constructor() {
+    this.hash = null
+    this.totalAmount = 0
+    this.availableAmount = 0
+  }
+
+  async init(book, amount) {
+    const books = useBooksStore()
+    const { $books } = useNuxtApp()
+
+    // Read the current books
+    try {
+      const json = await $books.read()
+      books.fromJSON(json)
+
+      books.addBook(book)
+
+      await $books.write(books.toJSON())
+
+      this.hash = book?.getHash()
+      this.totalAmount = amount
+      this.availableAmount = amount
+
+      return true
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 
   getBook() {
-    return this.book
+    const books = useBooksStore()
+
+    return books.getBook(this.hash)
   }
 
   getTotalAmount() {
     return this.totalAmount
   }
- getAvailableAmount
+
   getAvailableAmount() {
     return this.availableAmount
   }
 
   lend() {
     this.availableAmount--;
- 
   }
 
   returnBook() {
@@ -39,11 +66,11 @@ export default class Books {
   toJSON() {
     return { ...this }
   }
+
   static fromJSON(json) {
-    let books = new Books({})
+    let books = new Books()
 
     Object.assign(books, json)
-    books.book = Book.fromJSON(json.book)
 
     return books
   }
