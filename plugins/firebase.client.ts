@@ -15,7 +15,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     appId: "1:472457988690:web:20d8015c28f441ba3c2d8b"
   };
 
-  console.log("Firebase config", firebaseConfig);
+
   // The Firebase API variables should not really be stored in public, but whp cares for now
 
   const app = initializeApp(firebaseConfig);
