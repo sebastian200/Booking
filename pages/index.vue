@@ -11,7 +11,7 @@
 </style>
 
 <template>
-  <div class=" md:px-10 lg:px-28 xl:px-40">
+  <div class=" md:px-10 lg:px-28 2xl:px-40">
     <div id="bookSorting" class="fixed   w-full ">
       <div class="bg-slate-50 ">
         <div class=" flex justify-around pb-4 p-1 w-full ">
@@ -34,14 +34,14 @@
           <option value="title-reversed">Titel A-Ö </option>
           <option value="pages">Sidor stigande</option>
           <option value="pages-reversed">Sidor fallande</option>
-          <option value="year">Älst</option>
+          <option value="year">Älst,</option>
           <option value="year-reversed">Nyast</option>
         </select>
       </div>
     </div>
     <div id="listOfBooks" class=" flex flex-wrap">
 
-      <div class="w-full lg:w-1/2 xl:w-1/3" v-for="book in booksModified" :key="book.id" >
+      <div class="w-full lg:w-1/2 2xl:w-1/3" v-for="book in booksModified" :key="book.id" >
         <BooksCard  :books=book @remove="removeBooks" @lend="lendBook" @returnBook="returnBook" />
         <!-- <div>{{book}} hello</div> -->
       </div>
@@ -61,7 +61,7 @@ const bookshelf = useBookshelfStore()
 const showFilter = ref(false)
 const sortOption = ref('title')
 const title = ref('')
-let newFormData = { title: '', author: '', type: '', minPages: 0, maxPages: Infinity, genres: [], language: '', minYear: 1900, maxYear: 2023, rating: 0, format: '', }
+let newFormData = ref({ title: '', author: '', minPages: 0, maxPages: Infinity, genres: [], language: '', minYear: 1900, maxYear: 2023, rating: 0, format: '', })
 let books = ref(bookshelf.books)
 
 
@@ -89,10 +89,10 @@ function toggleFilter() {
   showFilter.value = !showFilter.value
 }
 const booksModified = computed(() => {
-  newFormData.title = title.value
-  let modifiedBooks = bookshelf.filterBooks(newFormData, books)
+  newFormData.value.title = title.value
+  let modifiedBooks = bookshelf.filterBooks(newFormData.value, books)
   console.log(newFormData)
-  console.log(modifiedBooks)
+
   modifiedBooks = getSortedBooks(sortOption.value, modifiedBooks)
   return modifiedBooks
 });
@@ -102,7 +102,7 @@ const booksModified = computed(() => {
 const filterBooks = (formData) => {
 
   showFilter.value = !showFilter.value
-  newFormData = formData
+  newFormData.value = formData
 
   console.log(newFormData)
 }
