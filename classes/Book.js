@@ -44,9 +44,8 @@ export default class Book {
     this.language = language
     this.rating = rating
     this.pages = pages
-    this.imageURL = imageURL
+    this.imageURL = imageURL ?? "/images/books/missing.png"
     this.description = description
-
 
     this.hash = createHash(this.title, this.author)
   }
@@ -80,7 +79,7 @@ export default class Book {
   }
 
   getImage() {
-    return this.image
+    return this.imageURL
   }
 
   getHash() {

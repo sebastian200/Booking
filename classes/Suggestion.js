@@ -3,26 +3,30 @@ import Book from "./Book.js"
 import { useBooksStore } from "~/stores/books.js"
 
 export default class Suggestion {
-  constructor({ book }) {
-    this.hash = book?.getHash()
+  constructor() {
+    this.hash = null // The book has not been initialized
     this.votes = 0
+  }
 
-    if(book != null) {
-      const books = useBooksStore()
-      const { $books } = useNuxtApp()
+  async init(book) {
+    const books = useBooksStore()
+    const { $books } = useNuxtApp()
 
-      // Read the current books
-      $books.read()
-      .then(json => {
-        books.fromJSON(json)
+    // Read the current books
+    try {
+      const json = await $books.read()
+      books.fromJSON(json)
 
-        books.addBook(book)
+      books.addBook(book)
 
-        $books.write(books.toJSON())
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      await $books.write(books.toJSON())
+
+      this.hash = book?.getHash()
+
+      return true
+    }
+    catch (error) {
+      console.log(error)
     }
   }
 
@@ -49,7 +53,7 @@ export default class Suggestion {
   }
 
   static fromJSON(json) {
-    let suggestion = new Suggestion({})
+    let suggestion = new Suggestion()
 
     Object.assign(suggestion, json)
 

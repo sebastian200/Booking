@@ -2,7 +2,7 @@
 <template>
   <div v-if="suggestion && book && hash" class="flex justify-between bg-gray-200 m-4">
     <NuxtLink :to="`book?hash=${hash}`" class="flex justify-start items-center">
-      <img :src="`images/books/${book?.getImage() ?? 'missing.png'}`" class="size-16 aspect-square object-cover m-2"/>
+      <img :src="book?.getImage()" class="size-16 aspect-square object-cover m-2"/>
       <div class="flex flex-col justify-start space-y-0 m-4">
         <p class="text-lg font-bold">{{ book?.getTitle() }}</p>
         <p class="text-md">{{ book?.getAuthor() }}</p>

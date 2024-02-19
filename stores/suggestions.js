@@ -55,7 +55,12 @@ export const useSuggestionsStore = defineStore("suggestions", {
      * - false | something went wrong
      */
     addSuggestion(suggestion) {
-      let hash = suggestion.getBook().getHash()
+      let hash = suggestion?.getBook()?.getHash()
+
+      if(hash == null) {
+        console.log("Trying to add suggestion with hash null")
+        return false
+      }
 
       for(let current of this.getSuggestions) {
         if(current?.getBook()?.getHash() === hash) {
