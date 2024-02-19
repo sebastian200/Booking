@@ -34,7 +34,7 @@
           <option value="title-reversed">Titel A-Ö </option>
           <option value="pages">Sidor stigande</option>
           <option value="pages-reversed">Sidor fallande</option>
-          <option value="year">Älst</option>
+          <option value="year">Älst,</option>
           <option value="year-reversed">Nyast</option>
         </select>
       </div>
