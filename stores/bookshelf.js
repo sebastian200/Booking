@@ -183,6 +183,8 @@ filterBooks(formData = {
   let title = formData.title
   let author = formData.author
   let type = formData.type
+  let minYear = formData.minYear
+  let maxYear = formData.maxYear
   let minPages = formData.minPages
   let maxPages = formData.maxPages
   let genres = formData.genres
@@ -195,13 +197,14 @@ filterBooks(formData = {
   let filteredBooks = data.value.slice();
 
 
+
   if (title !== '') {
 
-    filteredBooks = filteredBooks.filter(books => books.value.book.title.includes(title));
+    filteredBooks = filteredBooks.filter(books => books.value.book.title.toLowerCase().includes(title.toLowerCase()));
 
   }
   if (author !== '') {
-    filteredBooks = filteredBooks.filter(books => books.value.book.author.includes(author));
+    filteredBooks = filteredBooks.filter(books => books.value.book.author.toLowerCase().includes(author.toLowerCase()));
   }
   if (type !== '') {
     filteredBooks = filteredBooks.filter(books => books.value.book.type === type);
@@ -215,6 +218,18 @@ filterBooks(formData = {
   if (maxPages !== Infinity) {
     filteredBooks = filteredBooks.filter(books => books.value.book.pages <= maxPages);
   }
+
+  if (minYear !== 1900) {
+
+    filteredBooks = filteredBooks.filter(books => books.value.book.year >= minYear);
+  }
+
+  if (maxYear !== 2023) {
+
+    filteredBooks = filteredBooks.filter(books => books.value.book.year <= maxYear);
+  }
+
+
 
   if (genres.length > 0) {
     filteredBooks = filteredBooks.filter(books => books.value.book.genres.some(genre => genres.includes(genre)));

@@ -2,7 +2,7 @@
 <template>
   <div class="  bg-slate-50 ">
     <form @submit.prevent="submitForm">
-      <div id="title" class="p-1 md:px-6 px-3 pr-4 shadow">
+      <div id="title" class="p-1 md:px-6 px-3 pr-4 shadow hidden">
         <div class="" @click="showTitle = !showTitle">Titel ></div>
         <div class="flex justify-center">
         <input v-if="showTitle" class="w-full md:w-3/4" type="text" placeholder="Skriv titel här" v-model="title">
@@ -115,7 +115,6 @@ const emit = defineEmits([
   'submit',
 ])
 
-console.log(title)
 
 
 
@@ -127,6 +126,7 @@ function submitForm() {
   const formData = {
     title: title.value,
     author: author.value,
+    format: format.value,
     genres: selectedGenres.value,
     language: selectedLanguage.value,
     minPages: minPages.value,
@@ -136,6 +136,7 @@ function submitForm() {
     rating: rating.value,
   };
 
+console.log(formData)
 
 
   // Emit the form data to the parent component
